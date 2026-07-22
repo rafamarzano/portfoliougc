@@ -369,6 +369,13 @@
       radial-gradient(circle at 30% 20%, rgba(255,255,255,0.22), transparent 45%),
       radial-gradient(circle at 80% 85%, rgba(142,24,37,0.35), transparent 50%);
   }
+  .hero-foto-foto{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
   .hero-foto-legenda{
     position: absolute;
     bottom: 20px; left: 20px; right: 20px;
@@ -380,6 +387,7 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     font-weight: 600;
+    text-shadow: 0 1px 6px rgba(20,17,13,0.65);
   }
   .hero-foto-ponto{
     width: 8px; height: 8px; border-radius: 50%;
@@ -404,8 +412,14 @@
     background: linear-gradient(200deg, var(--queimado) 0%, #d98a90 35%, var(--creme-carta) 70%, var(--royal) 130%);
     box-shadow: var(--sombra);
     position: relative;
-    /* EDITE AQUI: troque este bloco por uma <img> com a foto de rosto
-       da Rafaela para humanizar a seção "Sobre". */
+    overflow: hidden;
+  }
+  .sobre-foto-foto{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .sobre-destaques{
@@ -502,6 +516,7 @@
   }
 
   .cartao-trabalho{
+    display: block;
     border-radius: var(--raio);
     overflow: hidden;
     background: var(--creme-carta);
@@ -523,6 +538,13 @@
   }
   .cartao-trabalho-imagem.imagem-foto{
     aspect-ratio: 1/1;
+  }
+  .cartao-trabalho-foto{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .cartao-trabalho-imagem::after{
     content: "";
@@ -894,7 +916,8 @@
           <a href="#portfolio-videos" class="botao botao-secundario" id="hero-cta-secundario"></a>
         </div>
       </div>
-      <div class="hero-foto revelar revelar-atraso-2" role="img" id="hero-foto-aria">
+      <div class="hero-foto revelar revelar-atraso-2" id="hero-foto-aria">
+        <img class="hero-foto-foto" id="hero-foto-img" src="imagens/hero.jpg" alt="" style="object-position: center 20%;">
         <div class="hero-foto-legenda">
           <span><span class="hero-foto-ponto"></span><span id="hero-legenda-texto"></span></span>
         </div>
@@ -907,8 +930,8 @@
        ============================================================ -->
   <section class="container" id="sobre">
     <div class="sobre-grade">
-      <div class="sobre-foto revelar" role="img" id="sobre-foto-aria">
-        <!-- EDITE AQUI: troque .sobre-foto por uma <img> real, ver comentário no CSS. -->
+      <div class="sobre-foto revelar" id="sobre-foto-aria">
+        <img class="sobre-foto-foto" id="sobre-foto-img" src="imagens/sobre.jpg" alt="" style="object-position: center 25%;">
       </div>
       <div class="sobre-texto revelar revelar-atraso-2">
         <span class="eyebrow" id="sobre-eyebrow"></span>
@@ -1056,12 +1079,24 @@ const PORTFOLIO_VIDEOS = [
   { chave: "organizacao-mesa", categoria: "outros", paleta: "paleta-1" },
 ];
 
+// EDITE AQUI: link da playlist do YouTube de cada categoria. Como os
+// cards de vídeo não têm um vídeo individual hospedado, cada card abre
+// a playlist do nicho correspondente numa aba nova.
+const PLAYLISTS_VIDEOS = {
+  beleza: "https://www.youtube.com/playlist?list=PLNRyGG4IKRF0",
+  moda: "https://www.youtube.com/playlist?list=PLEQDfedrCZkM",
+  outros: "https://www.youtube.com/playlist?list=PLaMQ8lbpCA6M",
+};
+
 // EDITE AQUI: itens do portfólio de fotos (galeria simples, sem filtro).
+// "imagem" é o caminho do arquivo em imagens/portfolio-fotos/; se ausente,
+// o card usa o gradiente "paleta" como no design original. "posicao" ajusta
+// o enquadramento (object-position) quando o recorte quadrado corta a foto.
 const PORTFOLIO_FOTOS = [
-  { chave: "still-skincare", paleta: "paleta-2" },
-  { chave: "still-maquiagem", paleta: "paleta-1" },
-  { chave: "editorial-look", paleta: "paleta-4" },
-  { chave: "still-acessorios", paleta: "paleta-3" },
+  { chave: "still-skincare", paleta: "paleta-2", imagem: "imagens/portfolio-fotos/still-skincare.png", posicao: "center 35%" },
+  { chave: "still-maquiagem", paleta: "paleta-1", imagem: "imagens/portfolio-fotos/still-maquiagem.png", posicao: "center 20%" },
+  { chave: "editorial-look", paleta: "paleta-4", imagem: "imagens/portfolio-fotos/editorial-look.jpg", posicao: "center 15%" },
+  { chave: "still-acessorios", paleta: "paleta-3", imagem: "imagens/portfolio-fotos/still-acessorios.png", posicao: "center 30%" },
   { chave: "still-cenario-natural", paleta: "paleta-6" },
   { chave: "detalhe-textura", paleta: "paleta-5" },
 ];
@@ -1346,9 +1381,7 @@ function renderHero(){
   document.getElementById("hero-cta-primario").textContent = t.hero.textoBotaoPrimario;
   document.getElementById("hero-cta-secundario").textContent = t.hero.textoBotaoSecundario;
   document.getElementById("hero-legenda-texto").textContent = t.hero.legendaFoto;
-  document.getElementById("hero-foto-aria").setAttribute(
-    "aria-label", "Foto de " + DADOS.nomeCompleto + ", " + t.profissao
-  );
+  document.getElementById("hero-foto-img").alt = "Foto de " + DADOS.nomeCompleto + ", " + t.profissao;
 }
 
 function renderSobre(){
@@ -1362,9 +1395,7 @@ function renderSobre(){
     t.sobre.paragrafos.map(p => "<p>" + p + "</p>").join("");
   document.getElementById("sobre-lista").innerHTML =
     t.sobre.diferenciais.map(d => "<li>" + d + "</li>").join("");
-  document.getElementById("sobre-foto-aria").setAttribute(
-    "aria-label", "Retrato de " + DADOS.nomeCompleto
-  );
+  document.getElementById("sobre-foto-img").alt = "Retrato de " + DADOS.nomeCompleto;
 }
 
 function renderPortfolioVideos(){
@@ -1393,12 +1424,13 @@ function renderPortfolioVideos(){
     const oculto = categoriaAtiva !== "todos" && item.categoria !== categoriaAtiva;
     const titulo = t.portfolioVideos.titulos[item.chave];
     const categoriaLabel = t.portfolioVideos.categorias[item.categoria];
-    return '<article class="cartao-trabalho revelar' + (oculto ? " oculto" : "") + '" data-categoria="' + item.categoria + '">' +
+    const url = PLAYLISTS_VIDEOS[item.categoria];
+    return '<a class="cartao-trabalho revelar' + (oculto ? " oculto" : "") + '" data-categoria="' + item.categoria + '" href="' + url + '" target="_blank" rel="noopener noreferrer">' +
       '<div class="cartao-trabalho-imagem ' + item.paleta + '" role="img" aria-label="' + categoriaLabel + ': ' + titulo + '">' +
         '<span class="cartao-trabalho-tag">' + categoriaLabel + '</span>' +
         '<h3 class="cartao-trabalho-titulo">' + titulo + '</h3>' +
       '</div>' +
-    '</article>';
+    '</a>';
   }).join("");
 }
 
@@ -1411,8 +1443,13 @@ function renderPortfolioFotos(){
 
   document.getElementById("grade-fotos").innerHTML = PORTFOLIO_FOTOS.map(item => {
     const titulo = t.portfolioFotos.titulos[item.chave];
+    const foto = item.imagem
+      ? '<img class="cartao-trabalho-foto" src="' + item.imagem + '" alt="" style="object-position: ' + (item.posicao || "center") + ';">'
+      : '';
+    const roleImg = item.imagem ? '' : ' role="img" aria-label="' + titulo + '"';
     return '<article class="cartao-trabalho revelar">' +
-      '<div class="cartao-trabalho-imagem imagem-foto ' + item.paleta + '" role="img" aria-label="' + titulo + '">' +
+      '<div class="cartao-trabalho-imagem imagem-foto ' + item.paleta + '"' + roleImg + '>' +
+        foto +
         '<h3 class="cartao-trabalho-titulo">' + titulo + '</h3>' +
       '</div>' +
     '</article>';
