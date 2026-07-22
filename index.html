@@ -1666,7 +1666,7 @@ function renderPortfolioVideos(){
     return '<article class="cartao-trabalho revelar' + (oculto ? " oculto" : "") + '" data-categoria="' + item.categoria + '">' +
       '<div class="cartao-trabalho-imagem" data-video-id="' + item.id + '" data-video-titulo="' + titulo + '">' +
         '<span class="cartao-trabalho-tag">' + categoriaLabel + '</span>' +
-        '<img class="cartao-trabalho-thumb" src="https://i.ytimg.com/vi/' + item.id + '/hqdefault.jpg" alt="" loading="lazy">' +
+        '<img class="cartao-trabalho-thumb" src="https://i.ytimg.com/vi/' + item.id + '/maxresdefault.jpg" onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/' + item.id + '/hqdefault.jpg\';" alt="" loading="lazy">' +
         '<button type="button" class="cartao-trabalho-play" aria-label="' + textoReproduzir + ': ' + titulo + '"></button>' +
       '</div>' +
       '<div class="cartao-trabalho-legenda">' +
