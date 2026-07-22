@@ -732,49 +732,38 @@
   .faq-janela-barra{
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 14px 22px;
-    background: linear-gradient(135deg, var(--royal), var(--royal-escuro));
+    gap: 16px;
+    padding: 16px 26px;
+    background: var(--creme-carta);
+    border-bottom: 1px solid var(--linha);
   }
-  .faq-janela-icone{
-    width: 26px;
-    height: 26px;
+  .faq-janela-pontos{ display: flex; gap: 7px; flex-shrink: 0; }
+  .faq-janela-pontos span{
+    width: 10px; height: 10px;
     border-radius: 50%;
-    background: var(--branco);
-    color: var(--royal);
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .faq-janela-nome{
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--branco);
-    opacity: 0.92;
-  }
-  .faq-janela-controles{
-    margin-left: auto;
-    display: flex;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-  .faq-janela-controles span{
-    width: 10px;
-    height: 10px;
-    border-radius: 3px;
-    background: rgba(255,255,255,0.35);
     display: block;
   }
+  .faq-janela-pontos span:nth-child(1){ background: var(--queimado); }
+  .faq-janela-pontos span:nth-child(2){ background: var(--royal); }
+  .faq-janela-pontos span:nth-child(3){ background: var(--verde-suave); }
+  .faq-janela-nome{
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    color: var(--tinta-suave);
+    letter-spacing: 0.01em;
+  }
+  .faq-janela-status{
+    margin-left: auto;
+    font-size: 0.78rem;
+    color: var(--tinta-suave);
+    white-space: nowrap;
+  }
   .faq-chat{
-    padding: 32px;
+    padding: 40px;
     display: flex;
     flex-direction: column;
     gap: 22px;
-    background: var(--azul-claro);
+    background: var(--branco);
   }
   .faq-pergunta,
   .faq-resposta{
@@ -796,8 +785,8 @@
     font-weight: 700;
     padding: 0 4px;
   }
-  .faq-pergunta .faq-remetente{ color: var(--royal-escuro); }
-  .faq-resposta .faq-remetente{ color: var(--verde-suave); }
+  .faq-pergunta .faq-remetente{ color: var(--tinta-suave); }
+  .faq-resposta .faq-remetente{ color: var(--queimado); }
   .faq-bolha{
     padding: 14px 18px;
     border-radius: 16px;
@@ -805,14 +794,14 @@
     line-height: 1.5;
   }
   .faq-pergunta .faq-bolha{
-    background: var(--royal);
-    color: var(--branco);
+    background: var(--tinta);
+    color: var(--creme);
     border-bottom-right-radius: 4px;
   }
   .faq-resposta .faq-bolha{
-    background: var(--branco);
+    background: var(--creme-carta);
     color: var(--tinta);
-    border: 1px solid var(--azul-claro-borda);
+    border: 1px solid var(--linha);
     border-bottom-left-radius: 4px;
   }
 
@@ -1176,9 +1165,9 @@
     </div>
     <div class="faq-janela revelar">
       <div class="faq-janela-barra">
-        <div class="faq-janela-icone" aria-hidden="true">R</div>
-        <span class="faq-janela-nome">historico_de_conversa.msn</span>
-        <div class="faq-janela-controles" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="faq-janela-pontos" aria-hidden="true"><span></span><span></span><span></span></div>
+        <span class="faq-janela-nome">duvidas.rafa</span>
+        <span class="faq-janela-status" id="faq-janela-status"></span>
       </div>
       <div class="faq-chat" id="faq-chat"></div>
     </div>
@@ -1410,6 +1399,7 @@ const TEXTOS = {
       texto: "Um resumo rápido de como funciona o processo, do briefing até a entrega final.",
       voce: "Você pergunta",
       rafa: "Rafa responde",
+      status: "Perguntas e respostas",
     },
     contato: {
       eyebrow: "Contato",
@@ -1511,6 +1501,7 @@ const TEXTOS = {
       texto: "A quick summary of how the process works, from the briefing to final delivery.",
       voce: "You ask",
       rafa: "Rafa answers",
+      status: "Questions and answers",
     },
     contato: {
       eyebrow: "Contact",
@@ -1614,6 +1605,7 @@ function renderFaq(){
   document.getElementById("faq-titulo").innerHTML =
     t.faq.tituloAntes + "<em>" + t.faq.tituloDestaque + "</em>" + t.faq.tituloDepois;
   document.getElementById("faq-texto").textContent = t.faq.texto;
+  document.getElementById("faq-janela-status").textContent = t.faq.status;
 
   document.getElementById("faq-chat").innerHTML = FAQ_ITENS.map(item => {
     const pergunta = idiomaAtual === "pt" ? item.perguntaPt : item.perguntaEn;
