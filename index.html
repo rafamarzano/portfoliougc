@@ -539,6 +539,9 @@
   .cartao-trabalho-imagem.imagem-foto{
     aspect-ratio: 1/1;
   }
+  .cartao-trabalho-imagem.imagem-foto::after{
+    display: none;
+  }
   .cartao-trabalho-foto{
     position: absolute;
     inset: 0;
@@ -1088,17 +1091,19 @@ const PLAYLISTS_VIDEOS = {
   outros: "https://www.youtube.com/playlist?list=PLaMQ8lbpCA6M",
 };
 
-// EDITE AQUI: itens do portfólio de fotos (galeria simples, sem filtro).
-// "imagem" é o caminho do arquivo em imagens/portfolio-fotos/; se ausente,
-// o card usa o gradiente "paleta" como no design original. "posicao" ajusta
-// o enquadramento (object-position) quando o recorte quadrado corta a foto.
+// EDITE AQUI: fotos da galeria (galeria simples, sem filtro, sem título
+// visível — só a foto). "imagem" é o caminho do arquivo em
+// imagens/portfolio-fotos/. "posicao" ajusta o enquadramento
+// (object-position) quando o recorte quadrado corta a foto. "altPt"/"altEn"
+// só são lidos por leitores de tela (texto alternativo), não aparecem na tela.
 const PORTFOLIO_FOTOS = [
-  { chave: "still-skincare", paleta: "paleta-2", imagem: "imagens/portfolio-fotos/still-skincare.png", posicao: "center 35%" },
-  { chave: "still-maquiagem", paleta: "paleta-1", imagem: "imagens/portfolio-fotos/still-maquiagem.png", posicao: "center 20%" },
-  { chave: "editorial-look", paleta: "paleta-4", imagem: "imagens/portfolio-fotos/editorial-look.jpg", posicao: "center 15%" },
-  { chave: "still-acessorios", paleta: "paleta-3", imagem: "imagens/portfolio-fotos/still-acessorios.png", posicao: "center 30%" },
-  { chave: "still-cenario-natural", paleta: "paleta-6" },
-  { chave: "detalhe-textura", paleta: "paleta-5" },
+  { imagem: "imagens/portfolio-fotos/still-maquiagem.png", posicao: "center", altPt: "Still de produto, maquiagem", altEn: "Product still, makeup" },
+  { imagem: "imagens/portfolio-fotos/protetor-solar.png", posicao: "center", altPt: "Still de produto, protetor solar", altEn: "Product still, sunscreen" },
+  { imagem: "imagens/portfolio-fotos/still-acessorios.png", posicao: "center 30%", altPt: "Still de acessórios", altEn: "Accessories still" },
+  { imagem: "imagens/portfolio-fotos/acessorios-copa.jpg", posicao: "center 20%", altPt: "Still de acessórios, brincos", altEn: "Accessories still, earrings" },
+  { imagem: "imagens/portfolio-fotos/acessorios.jpg", posicao: "center 20%", altPt: "Still de acessórios, brincos e anéis", altEn: "Accessories still, earrings and rings" },
+  { imagem: "imagens/portfolio-fotos/editorial-look.jpg", posicao: "center 10%", altPt: "Editorial de look completo", altEn: "Full outfit editorial" },
+  { imagem: "imagens/portfolio-fotos/bone.jpg", posicao: "center 20%", altPt: "Still de produto, boné", altEn: "Product still, cap" },
 ];
 
 // EDITE AQUI: todo o conteúdo do site em português (pt) e inglês (en).
@@ -1166,14 +1171,6 @@ const TEXTOS = {
       tituloDestaque: "produzi",
       tituloDepois: " para marcas",
       texto: "Still de produto e still em uso, com composição, luz e ângulo pensados para valorizar cada detalhe.",
-      titulos: {
-        "still-skincare": "Still de produto, skincare",
-        "still-maquiagem": "Still em uso, maquiagem",
-        "editorial-look": "Editorial de look completo",
-        "still-acessorios": "Still de acessórios",
-        "still-cenario-natural": "Still de produto em cenário natural",
-        "detalhe-textura": "Detalhe de textura em close",
-      },
     },
     servicos: {
       eyebrow: "Serviços",
@@ -1276,14 +1273,6 @@ const TEXTOS = {
       tituloDestaque: "produced",
       tituloDepois: " for brands",
       texto: "Product stills and in-use stills, with composition, light and angle designed to highlight every detail.",
-      titulos: {
-        "still-skincare": "Product still, skincare",
-        "still-maquiagem": "Still in use, makeup",
-        "editorial-look": "Full outfit editorial",
-        "still-acessorios": "Accessories still",
-        "still-cenario-natural": "Product still in a natural setting",
-        "detalhe-textura": "Close-up texture detail",
-      },
     },
     servicos: {
       eyebrow: "Services",
@@ -1442,15 +1431,10 @@ function renderPortfolioFotos(){
   document.getElementById("portfolio-fotos-texto").textContent = t.portfolioFotos.texto;
 
   document.getElementById("grade-fotos").innerHTML = PORTFOLIO_FOTOS.map(item => {
-    const titulo = t.portfolioFotos.titulos[item.chave];
-    const foto = item.imagem
-      ? '<img class="cartao-trabalho-foto" src="' + item.imagem + '" alt="" style="object-position: ' + (item.posicao || "center") + ';">'
-      : '';
-    const roleImg = item.imagem ? '' : ' role="img" aria-label="' + titulo + '"';
+    const alt = idiomaAtual === "pt" ? item.altPt : item.altEn;
     return '<article class="cartao-trabalho revelar">' +
-      '<div class="cartao-trabalho-imagem imagem-foto ' + item.paleta + '"' + roleImg + '>' +
-        foto +
-        '<h3 class="cartao-trabalho-titulo">' + titulo + '</h3>' +
+      '<div class="cartao-trabalho-imagem imagem-foto">' +
+        '<img class="cartao-trabalho-foto" src="' + item.imagem + '" alt="' + alt + '" style="object-position: ' + item.posicao + ';">' +
       '</div>' +
     '</article>';
   }).join("");
