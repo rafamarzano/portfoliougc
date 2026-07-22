@@ -531,16 +531,9 @@
   .cartao-trabalho-imagem{
     aspect-ratio: 9/16;
     position: relative;
-    display: flex;
-    align-items: flex-end;
-    padding: 22px;
-    /* Gradiente definido via classe .paleta-N no HTML, ver JS de renderização */
   }
   .cartao-trabalho-imagem.imagem-foto{
     aspect-ratio: 1/1;
-  }
-  .cartao-trabalho-imagem.imagem-foto::after{
-    display: none;
   }
   .cartao-trabalho-foto{
     position: absolute;
@@ -549,11 +542,27 @@
     height: 100%;
     object-fit: cover;
   }
-  .cartao-trabalho-imagem::after{
-    content: "";
+  .cartao-trabalho-video{
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(20,17,13,0.75) 0%, transparent 55%);
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .cartao-trabalho-legenda{
+    padding: 16px 18px 18px;
+  }
+  .cartao-trabalho-link-externo{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--royal);
+  }
+  .cartao-trabalho-link-externo:hover{
+    color: var(--royal-escuro);
+    text-decoration: underline;
   }
   .cartao-trabalho-tag{
     position: relative;
@@ -572,20 +581,11 @@
     left: 18px;
   }
   .cartao-trabalho-titulo{
-    position: relative;
-    z-index: 2;
-    color: var(--branco);
     font-family: var(--serif);
-    font-size: 1.2rem;
-    max-width: 90%;
+    font-size: 1.05rem;
+    color: var(--tinta);
+    margin-bottom: 8px;
   }
-
-  .paleta-1{ background: linear-gradient(135deg, var(--royal), #4a90d9); }
-  .paleta-2{ background: linear-gradient(135deg, var(--queimado), #d98a90); }
-  .paleta-3{ background: linear-gradient(150deg, var(--tinta), var(--royal)); }
-  .paleta-4{ background: linear-gradient(160deg, var(--royal-escuro), var(--queimado)); }
-  .paleta-5{ background: linear-gradient(140deg, #d98a90, var(--royal)); }
-  .paleta-6{ background: linear-gradient(160deg, var(--tinta), var(--queimado)); }
 
   /* ==========================================================
      6. SERVIÇOS
@@ -1067,29 +1067,23 @@ const DADOS = {
 };
 
 // EDITE AQUI: itens do portfólio de vídeos. "categoria" é a chave usada
-// no filtro (beleza | moda | outros) e não muda com o idioma; os títulos
-// de cada item ficam em TEXTOS.pt/en.portfolioVideos.titulos, buscados
-// pela "chave". "paleta" define o gradiente do bloco (paleta-1 a paleta-6).
+// no filtro (beleza | moda | outros). "id" é o ID do vídeo no YouTube
+// (a parte depois de /shorts/ ou de v= no link). "url" é o link original
+// do Short, usado no botão "Assistir no YouTube". Cada card incorpora o
+// vídeo real, então não precisa mais de gradiente/paleta.
 const PORTFOLIO_VIDEOS = [
-  { chave: "skincare-noturno", categoria: "beleza", paleta: "paleta-1" },
-  { chave: "unboxing-perfumaria", categoria: "beleza", paleta: "paleta-2" },
-  { chave: "cabelo-brilho", categoria: "beleza", paleta: "paleta-5" },
-  { chave: "uma-peca-sete-looks", categoria: "moda", paleta: "paleta-3" },
-  { chave: "provador-online", categoria: "moda", paleta: "paleta-4" },
-  { chave: "acessorios-transformam", categoria: "moda", paleta: "paleta-6" },
-  { chave: "cantinho-leitura", categoria: "outros", paleta: "paleta-2" },
-  { chave: "receita-rapida", categoria: "outros", paleta: "paleta-5" },
-  { chave: "organizacao-mesa", categoria: "outros", paleta: "paleta-1" },
+  { id: "9oCH6CQwJ8w", categoria: "beleza", url: "https://youtube.com/shorts/9oCH6CQwJ8w", tituloPt: "Maquiagem – Sheglam", tituloEn: "Makeup – Sheglam" },
+  { id: "KjkVzW6Spp0", categoria: "beleza", url: "https://youtube.com/shorts/KjkVzW6Spp0", tituloPt: "Skincare – Garnier", tituloEn: "Skincare – Garnier" },
+  { id: "O1VvaPq7gX0", categoria: "beleza", url: "https://youtube.com/shorts/O1VvaPq7gX0", tituloPt: "Bodycare – Dove", tituloEn: "Body care – Dove" },
+  { id: "3tQ1ssbbTUI", categoria: "beleza", url: "https://youtube.com/shorts/3tQ1ssbbTUI", tituloPt: "Skincare ASMR – Garnier", tituloEn: "ASMR skincare – Garnier" },
+  { id: "ja1bHI9TCgE", categoria: "beleza", url: "https://youtube.com/shorts/ja1bHI9TCgE", tituloPt: "Haircare – Pantene", tituloEn: "Hair care – Pantene" },
+  { id: "OeXmC4tPc8E", categoria: "beleza", url: "https://youtube.com/shorts/OeXmC4tPc8E", tituloPt: "Haircare – Elseve", tituloEn: "Hair care – Elseve" },
+  { id: "hp0bmPDBuFg", categoria: "moda", url: "https://youtube.com/shorts/hp0bmPDBuFg", tituloPt: "Trend de acessórios", tituloEn: "Accessories trend" },
+  { id: "h8v-Lkg7GYw", categoria: "moda", url: "https://youtube.com/shorts/h8v-Lkg7GYw", tituloPt: "Unboxing de roupas – Temu", tituloEn: "Clothing unboxing – Temu" },
+  { id: "msCW92ZLvnU", categoria: "moda", url: "https://youtube.com/shorts/msCW92ZLvnU", tituloPt: "Uma peça, sete looks – Shein", tituloEn: "One piece, seven looks – Shein" },
+  { id: "LmCsCfUcFuc", categoria: "moda", url: "https://youtube.com/shorts/LmCsCfUcFuc", tituloPt: "Trend de acessórios", tituloEn: "Accessories trend" },
+  { id: "kwDV78lrpYU", categoria: "outros", url: "https://youtube.com/shorts/kwDV78lrpYU", tituloPt: "Gel de unha – Bluwe", tituloEn: "Nail gel – Bluwe" },
 ];
-
-// EDITE AQUI: link da playlist do YouTube de cada categoria. Como os
-// cards de vídeo não têm um vídeo individual hospedado, cada card abre
-// a playlist do nicho correspondente numa aba nova.
-const PLAYLISTS_VIDEOS = {
-  beleza: "https://www.youtube.com/playlist?list=PLNRyGG4IKRF0",
-  moda: "https://www.youtube.com/playlist?list=PLEQDfedrCZkM",
-  outros: "https://www.youtube.com/playlist?list=PLaMQ8lbpCA6M",
-};
 
 // EDITE AQUI: fotos da galeria (galeria simples, sem filtro, sem título
 // visível — só a foto). "imagem" é o caminho do arquivo em
@@ -1153,17 +1147,7 @@ const TEXTOS = {
       tituloDepois: " para marcas",
       texto: "Cada roteiro nasce de um briefing lido com atenção e entregue com estética, verdade e demonstração real do produto.",
       categorias: { todos: "Todos", beleza: "Beleza", moda: "Moda e acessórios", outros: "Outros" },
-      titulos: {
-        "skincare-noturno": "Rotina de skincare noturna",
-        "unboxing-perfumaria": "Unboxing de perfumaria",
-        "cabelo-brilho": "Cabelo com brilho e movimento",
-        "uma-peca-sete-looks": "Uma peça, sete looks",
-        "provador-online": "Provador de loja online",
-        "acessorios-transformam": "Acessórios que transformam o look",
-        "cantinho-leitura": "Cantinho da leitura no fim do dia",
-        "receita-rapida": "Receita rápida com produto patrocinado",
-        "organizacao-mesa": "Organização da mesa de trabalho",
-      },
+      assistir: "Assistir no YouTube",
     },
     portfolioFotos: {
       eyebrow: "Portfólio",
@@ -1255,17 +1239,7 @@ const TEXTOS = {
       tituloDepois: " for brands",
       texto: "Every script starts with a briefing read carefully, and is delivered with aesthetics, truth and a real demonstration of the product.",
       categorias: { todos: "All", beleza: "Beauty", moda: "Fashion and accessories", outros: "Others" },
-      titulos: {
-        "skincare-noturno": "Night skincare routine",
-        "unboxing-perfumaria": "Perfume unboxing",
-        "cabelo-brilho": "Hair with shine and movement",
-        "uma-peca-sete-looks": "One piece, seven looks",
-        "provador-online": "Online store fitting room",
-        "acessorios-transformam": "Accessories that transform the look",
-        "cantinho-leitura": "Reading corner at the end of the day",
-        "receita-rapida": "Quick recipe with a sponsored product",
-        "organizacao-mesa": "Desk organization",
-      },
+      assistir: "Watch on YouTube",
     },
     portfolioFotos: {
       eyebrow: "Portfolio",
@@ -1411,15 +1385,18 @@ function renderPortfolioVideos(){
 
   gradeEl.innerHTML = PORTFOLIO_VIDEOS.map(item => {
     const oculto = categoriaAtiva !== "todos" && item.categoria !== categoriaAtiva;
-    const titulo = t.portfolioVideos.titulos[item.chave];
+    const titulo = idiomaAtual === "pt" ? item.tituloPt : item.tituloEn;
     const categoriaLabel = t.portfolioVideos.categorias[item.categoria];
-    const url = PLAYLISTS_VIDEOS[item.categoria];
-    return '<a class="cartao-trabalho revelar' + (oculto ? " oculto" : "") + '" data-categoria="' + item.categoria + '" href="' + url + '" target="_blank" rel="noopener noreferrer">' +
-      '<div class="cartao-trabalho-imagem ' + item.paleta + '" role="img" aria-label="' + categoriaLabel + ': ' + titulo + '">' +
+    return '<article class="cartao-trabalho revelar' + (oculto ? " oculto" : "") + '" data-categoria="' + item.categoria + '">' +
+      '<div class="cartao-trabalho-imagem">' +
         '<span class="cartao-trabalho-tag">' + categoriaLabel + '</span>' +
-        '<h3 class="cartao-trabalho-titulo">' + titulo + '</h3>' +
+        '<iframe class="cartao-trabalho-video" src="https://www.youtube.com/embed/' + item.id + '" title="' + titulo + '" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>' +
       '</div>' +
-    '</a>';
+      '<div class="cartao-trabalho-legenda">' +
+        '<h3 class="cartao-trabalho-titulo">' + titulo + '</h3>' +
+        '<a class="cartao-trabalho-link-externo" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' + t.portfolioVideos.assistir + ' ↗</a>' +
+      '</div>' +
+    '</article>';
   }).join("");
 }
 
