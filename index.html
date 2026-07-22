@@ -549,6 +549,41 @@
     height: 100%;
     border: 0;
   }
+  .cartao-trabalho-thumb{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .cartao-trabalho-play{
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(20,17,13,0.55);
+    backdrop-filter: blur(4px);
+    border: 1.5px solid rgba(255,255,255,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform var(--transicao), background var(--transicao);
+  }
+  .cartao-trabalho-play:hover{
+    background: var(--royal);
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+  .cartao-trabalho-play::before{
+    content: "";
+    border-style: solid;
+    border-width: 9px 0 9px 15px;
+    border-color: transparent transparent transparent var(--branco);
+    margin-left: 4px;
+  }
   .cartao-trabalho-legenda{
     padding: 16px 18px 18px;
   }
@@ -1383,14 +1418,17 @@ function renderPortfolioVideos(){
     renderPortfolioVideos();
   };
 
+  const textoReproduzir = idiomaAtual === "pt" ? "Reproduzir vídeo" : "Play video";
+
   gradeEl.innerHTML = PORTFOLIO_VIDEOS.map(item => {
     const oculto = categoriaAtiva !== "todos" && item.categoria !== categoriaAtiva;
     const titulo = idiomaAtual === "pt" ? item.tituloPt : item.tituloEn;
     const categoriaLabel = t.portfolioVideos.categorias[item.categoria];
     return '<article class="cartao-trabalho revelar' + (oculto ? " oculto" : "") + '" data-categoria="' + item.categoria + '">' +
-      '<div class="cartao-trabalho-imagem">' +
+      '<div class="cartao-trabalho-imagem" data-video-id="' + item.id + '" data-video-titulo="' + titulo + '">' +
         '<span class="cartao-trabalho-tag">' + categoriaLabel + '</span>' +
-        '<iframe class="cartao-trabalho-video" src="https://www.youtube.com/embed/' + item.id + '" title="' + titulo + '" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>' +
+        '<img class="cartao-trabalho-thumb" src="https://i.ytimg.com/vi/' + item.id + '/hqdefault.jpg" alt="" loading="lazy">' +
+        '<button type="button" class="cartao-trabalho-play" aria-label="' + textoReproduzir + ': ' + titulo + '"></button>' +
       '</div>' +
       '<div class="cartao-trabalho-legenda">' +
         '<h3 class="cartao-trabalho-titulo">' + titulo + '</h3>' +
@@ -1398,6 +1436,19 @@ function renderPortfolioVideos(){
       '</div>' +
     '</article>';
   }).join("");
+
+  gradeEl.onclick = function(e){
+    const botaoPlay = e.target.closest(".cartao-trabalho-play");
+    if(!botaoPlay) return;
+    const container = botaoPlay.closest(".cartao-trabalho-imagem");
+    const id = container.dataset.videoId;
+    const tituloVideo = container.dataset.videoTitulo;
+    const tagHtml = container.querySelector(".cartao-trabalho-tag").outerHTML;
+    container.innerHTML = tagHtml +
+      '<iframe class="cartao-trabalho-video" src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0" title="' + tituloVideo + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+  };
+
+  revelarNovos();
 }
 
 function renderPortfolioFotos(){
