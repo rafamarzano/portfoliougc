@@ -1289,18 +1289,19 @@ const FAQ_ITENS = [
 // EDITE AQUI: itens do portfólio de vídeos. "categoria" é a chave usada
 // no filtro (beleza | moda | outros). "id" é o ID do vídeo no YouTube
 // (a parte depois de /shorts/ ou de v= no link). "url" é o link original
-// do Short, usado no botão "Assistir no YouTube". Cada card incorpora o
-// vídeo real, então não precisa mais de gradiente/paleta.
+// do Short, usado no botão "Assistir no YouTube". "capa" é opcional: um
+// caminho de imagem local em imagens/portfolio-videos/ para usar como capa
+// do card no lugar da miniatura automática do YouTube.
 const PORTFOLIO_VIDEOS = [
   { id: "9oCH6CQwJ8w", categoria: "beleza", url: "https://youtube.com/shorts/9oCH6CQwJ8w", tituloPt: "Maquiagem – Sheglam", tituloEn: "Makeup – Sheglam" },
-  { id: "KjkVzW6Spp0", categoria: "beleza", url: "https://youtube.com/shorts/KjkVzW6Spp0", tituloPt: "Skincare – Garnier", tituloEn: "Skincare – Garnier" },
-  { id: "O1VvaPq7gX0", categoria: "beleza", url: "https://youtube.com/shorts/O1VvaPq7gX0", tituloPt: "Bodycare – Dove", tituloEn: "Body care – Dove" },
-  { id: "3tQ1ssbbTUI", categoria: "beleza", url: "https://youtube.com/shorts/3tQ1ssbbTUI", tituloPt: "Skincare ASMR – Garnier", tituloEn: "ASMR skincare – Garnier" },
-  { id: "ja1bHI9TCgE", categoria: "beleza", url: "https://youtube.com/shorts/ja1bHI9TCgE", tituloPt: "Haircare – Pantene", tituloEn: "Hair care – Pantene" },
-  { id: "OeXmC4tPc8E", categoria: "beleza", url: "https://youtube.com/shorts/OeXmC4tPc8E", tituloPt: "Haircare – Elseve", tituloEn: "Hair care – Elseve" },
+  { id: "KjkVzW6Spp0", categoria: "beleza", url: "https://youtube.com/shorts/KjkVzW6Spp0", tituloPt: "Skincare – Garnier", tituloEn: "Skincare – Garnier", capa: "imagens/portfolio-videos/capa-skincare-garnier.png" },
+  { id: "O1VvaPq7gX0", categoria: "beleza", url: "https://youtube.com/shorts/O1VvaPq7gX0", tituloPt: "Bodycare – Dove", tituloEn: "Body care – Dove", capa: "imagens/portfolio-videos/capa-bodycare-dove.png" },
+  { id: "3tQ1ssbbTUI", categoria: "beleza", url: "https://youtube.com/shorts/3tQ1ssbbTUI", tituloPt: "Skincare ASMR – Garnier", tituloEn: "ASMR skincare – Garnier", capa: "imagens/portfolio-videos/capa-skincare-garnier-asmr.png" },
+  { id: "ja1bHI9TCgE", categoria: "beleza", url: "https://youtube.com/shorts/ja1bHI9TCgE", tituloPt: "Haircare – Pantene", tituloEn: "Hair care – Pantene", capa: "imagens/portfolio-videos/capa-haircare-pantene.png" },
+  { id: "OeXmC4tPc8E", categoria: "beleza", url: "https://youtube.com/shorts/OeXmC4tPc8E", tituloPt: "Haircare – Elseve", tituloEn: "Hair care – Elseve", capa: "imagens/portfolio-videos/capa-haircare-elseve.png" },
   { id: "hp0bmPDBuFg", categoria: "moda", url: "https://youtube.com/shorts/hp0bmPDBuFg", tituloPt: "Trend de acessórios", tituloEn: "Accessories trend" },
-  { id: "h8v-Lkg7GYw", categoria: "moda", url: "https://youtube.com/shorts/h8v-Lkg7GYw", tituloPt: "Unboxing de roupas – Temu", tituloEn: "Clothing unboxing – Temu" },
-  { id: "msCW92ZLvnU", categoria: "moda", url: "https://youtube.com/shorts/msCW92ZLvnU", tituloPt: "Uma peça, sete looks – Shein", tituloEn: "One piece, seven looks – Shein" },
+  { id: "h8v-Lkg7GYw", categoria: "moda", url: "https://youtube.com/shorts/h8v-Lkg7GYw", tituloPt: "Unboxing de roupas – Temu", tituloEn: "Clothing unboxing – Temu", capa: "imagens/portfolio-videos/capa-unboxing-temu.png" },
+  { id: "msCW92ZLvnU", categoria: "moda", url: "https://youtube.com/shorts/msCW92ZLvnU", tituloPt: "Uma peça, sete looks – Shein", tituloEn: "One piece, seven looks – Shein", capa: "imagens/portfolio-videos/capa-shein-sete-looks.png" },
   { id: "LmCsCfUcFuc", categoria: "moda", url: "https://youtube.com/shorts/LmCsCfUcFuc", tituloPt: "Trend de acessórios", tituloEn: "Accessories trend" },
   { id: "kwDV78lrpYU", categoria: "outros", url: "https://youtube.com/shorts/kwDV78lrpYU", tituloPt: "Gel de unha – Bluwe", tituloEn: "Nail gel – Bluwe" },
 ];
@@ -1666,7 +1667,9 @@ function renderPortfolioVideos(){
     return '<article class="cartao-trabalho revelar' + (oculto ? " oculto" : "") + '" data-categoria="' + item.categoria + '">' +
       '<div class="cartao-trabalho-imagem" data-video-id="' + item.id + '" data-video-titulo="' + titulo + '">' +
         '<span class="cartao-trabalho-tag">' + categoriaLabel + '</span>' +
-        '<img class="cartao-trabalho-thumb" src="https://i.ytimg.com/vi/' + item.id + '/maxresdefault.jpg" onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/' + item.id + '/hqdefault.jpg\';" alt="" loading="lazy">' +
+        (item.capa
+          ? '<img class="cartao-trabalho-thumb" src="' + item.capa + '" alt="" loading="lazy">'
+          : '<img class="cartao-trabalho-thumb" src="https://i.ytimg.com/vi/' + item.id + '/maxresdefault.jpg" onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/' + item.id + '/hqdefault.jpg\';" alt="" loading="lazy">') +
         '<button type="button" class="cartao-trabalho-play" aria-label="' + textoReproduzir + ': ' + titulo + '"></button>' +
       '</div>' +
       '<div class="cartao-trabalho-legenda">' +
