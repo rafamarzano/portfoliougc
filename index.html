@@ -266,7 +266,8 @@
   .nav-cta{
     background: var(--tinta);
     color: var(--creme) !important;
-    padding: 11px 22px;
+    padding: 13px 30px;
+    margin: -5px -8px;
     border-radius: 100px;
     font-size: 0.88rem !important;
   }
@@ -1061,7 +1062,7 @@
       width: 100%;
     }
     .nav-links .nav-cta{
-      margin-top: 14px;
+      margin: 14px 0 0;
       text-align: center;
       justify-content: center;
       display: flex;
@@ -1398,7 +1399,7 @@ const PORTFOLIO_FOTOS = [
 const TEXTOS = {
   pt: {
     nav: {
-      sobre: "Sobre", portfolio: "Portfólio", servicos: "Serviços", faq: "Perguntas", cta: "Fale comigo",
+      sobre: "Sobre", portfolio: "Portfólio", servicos: "Serviços", processo: "Processo", faq: "Perguntas", cta: "Fale comigo",
       abrirMenu: "Abrir menu de navegação", fecharMenu: "Fechar menu de navegação",
     },
     profissao: "Criadora de Conteúdo UGC",
@@ -1513,7 +1514,7 @@ const TEXTOS = {
 
   en: {
     nav: {
-      sobre: "About", portfolio: "Portfolio", servicos: "Services", faq: "FAQ", cta: "Get in touch",
+      sobre: "About", portfolio: "Portfolio", servicos: "Services", processo: "Process", faq: "FAQ", cta: "Get in touch",
       abrirMenu: "Open navigation menu", fecharMenu: "Close navigation menu",
     },
     profissao: "UGC Content Creator",
@@ -1647,6 +1648,7 @@ function renderCabecalho(){
     '<li><a href="#sobre">' + t.nav.sobre + '</a></li>' +
     '<li><a href="#portfolio-videos">' + t.nav.portfolio + '</a></li>' +
     '<li><a href="#servicos">' + t.nav.servicos + '</a></li>' +
+    '<li><a href="#processo">' + t.nav.processo + '</a></li>' +
     '<li><a href="#faq">' + t.nav.faq + '</a></li>' +
     '<li class="idioma-item">' +
       '<div class="idioma-toggle" role="group" aria-label="Idioma do site">' +
