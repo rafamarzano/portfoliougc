@@ -721,6 +721,47 @@
   }
 
   /* ==========================================================
+     6A. PROCESSO
+     ========================================================== */
+  .grade-processo{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .processo-item{
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: var(--branco);
+    border: 1px solid var(--linha);
+    border-radius: 100px;
+    padding: 18px 30px;
+  }
+  .processo-numero{
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--creme-carta);
+    border: 2px solid var(--queimado);
+    color: var(--queimado);
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .processo-texto{
+    font-size: 0.98rem;
+    color: var(--tinta-suave);
+  }
+  .processo-texto strong{
+    color: var(--tinta);
+    font-weight: 700;
+  }
+
+  /* ==========================================================
      6B. PERGUNTAS FREQUENTES
      ========================================================== */
   .faq-janela{
@@ -1033,6 +1074,13 @@
     .faq-chat{ padding: 22px; gap: 18px; }
     .faq-pergunta, .faq-resposta{ max-width: 92%; }
 
+    .processo-item{
+      border-radius: var(--raio);
+      align-items: flex-start;
+      padding: 20px 22px;
+      gap: 16px;
+    }
+
     .contato-janela-corpo{ padding: 26px 22px; }
     .contato-janela-barra{ padding: 13px 18px; flex-wrap: wrap; row-gap: 6px; }
     .contato-janela-status{ margin-left: 0; width: 100%; order: 3; }
@@ -1150,6 +1198,20 @@
       <p class="texto-secao" id="servicos-texto"></p>
     </div>
     <div class="grade-servicos" id="grade-servicos"></div>
+  </section>
+
+  <!-- ============================================================
+       6A. PROCESSO
+       ============================================================ -->
+  <section class="container" id="processo">
+    <div class="cabecalho-secao revelar">
+      <div>
+        <span class="eyebrow" id="processo-eyebrow"></span>
+        <h2 class="titulo-secao" id="processo-titulo"></h2>
+      </div>
+      <p class="texto-secao" id="processo-texto"></p>
+    </div>
+    <div class="grade-processo" id="grade-processo"></div>
   </section>
 
   <!-- ============================================================
@@ -1326,7 +1388,7 @@ const PORTFOLIO_FOTOS = [
 const TEXTOS = {
   pt: {
     nav: {
-      sobre: "Sobre", portfolio: "Portfólio", servicos: "Serviços", cta: "Fale comigo",
+      sobre: "Sobre", portfolio: "Portfólio", servicos: "Serviços", faq: "Perguntas", cta: "Fale comigo",
       abrirMenu: "Abrir menu de navegação", fecharMenu: "Fechar menu de navegação",
     },
     profissao: "Criadora de Conteúdo UGC",
@@ -1392,13 +1454,26 @@ const TEXTOS = {
         { titulo: "Conteúdo recorrente", descricao: "Pacotes mensais para manter o seu feed sempre vivo, com constância e planejamento em vez de conteúdo solto de vez em quando.", tag: "Entrega todo mês" },
       ],
     },
+    processo: {
+      eyebrow: "Como funciona",
+      tituloAntes: "O ",
+      tituloDestaque: "processo",
+      tituloDepois: " UGC",
+      texto: "Do briefing à aprovação final, um passo a passo simples e transparente.",
+      itens: [
+        { titulo: "Analiso o briefing da marca", descricao: "Para compreender seus objetivos, público-alvo e expectativas para o conteúdo." },
+        { titulo: "Roteirização", descricao: "Desenvolvo um roteiro claro e estratégico, destacando os principais benefícios do produto que irão conectar com o público-alvo." },
+        { titulo: "Gravação + edição", descricao: "Nesta etapa, foco em captar a essência do produto de forma que envolve e gera identificação com o público." },
+        { titulo: "Aprovação", descricao: "Entrego o vídeo final dentro do prazo estabelecido, pronto para ser utilizado pela marca. O processo demora entre 7 e 10 dias úteis para ser finalizado." },
+      ],
+    },
     faq: {
       eyebrow: "Perguntas frequentes",
-      tituloAntes: "Perguntas que ",
-      tituloDestaque: "recebo bastante",
+      tituloAntes: "Perguntas sobre o ",
+      tituloDestaque: "processo",
       tituloDepois: "",
       texto: "Um resumo rápido de como funciona o processo, do briefing até a entrega final.",
-      voce: "Você pergunta",
+      voce: "Pergunta",
       rafa: "Rafa responde",
       status: "Perguntas e respostas",
     },
@@ -1428,7 +1503,7 @@ const TEXTOS = {
 
   en: {
     nav: {
-      sobre: "About", portfolio: "Portfolio", servicos: "Services", cta: "Get in touch",
+      sobre: "About", portfolio: "Portfolio", servicos: "Services", faq: "FAQ", cta: "Get in touch",
       abrirMenu: "Open navigation menu", fecharMenu: "Close navigation menu",
     },
     profissao: "UGC Content Creator",
@@ -1494,13 +1569,26 @@ const TEXTOS = {
         { titulo: "Recurring content", descricao: "Monthly packages to keep your feed always alive, with consistency and planning instead of occasional one-off content.", tag: "Delivered monthly" },
       ],
     },
+    processo: {
+      eyebrow: "How it works",
+      tituloAntes: "The UGC ",
+      tituloDestaque: "process",
+      tituloDepois: "",
+      texto: "From briefing to final approval, a simple and transparent step-by-step.",
+      itens: [
+        { titulo: "I review the brand's briefing", descricao: "To understand your goals, target audience and expectations for the content." },
+        { titulo: "Scripting", descricao: "I develop a clear, strategic script, highlighting the product's key benefits that will connect with the target audience." },
+        { titulo: "Filming + editing", descricao: "At this stage, I focus on capturing the product's essence in a way that engages and creates identification with the audience." },
+        { titulo: "Approval", descricao: "I deliver the final video within the agreed deadline, ready for the brand to use. The process takes between 7 and 10 business days to complete." },
+      ],
+    },
     faq: {
       eyebrow: "FAQ",
-      tituloAntes: "Questions I get ",
-      tituloDestaque: "all the time",
+      tituloAntes: "Questions about the ",
+      tituloDestaque: "process",
       tituloDepois: "",
       texto: "A quick summary of how the process works, from the briefing to final delivery.",
-      voce: "You ask",
+      voce: "Question",
       rafa: "Rafa answers",
       status: "Questions and answers",
     },
@@ -1549,6 +1637,7 @@ function renderCabecalho(){
     '<li><a href="#sobre">' + t.nav.sobre + '</a></li>' +
     '<li><a href="#portfolio-videos">' + t.nav.portfolio + '</a></li>' +
     '<li><a href="#servicos">' + t.nav.servicos + '</a></li>' +
+    '<li><a href="#faq">' + t.nav.faq + '</a></li>' +
     '<li class="idioma-item">' +
       '<div class="idioma-toggle" role="group" aria-label="Idioma do site">' +
         '<button type="button" class="idioma-btn' + (idiomaAtual === "pt" ? " ativo" : "") + '" data-lang="pt" aria-pressed="' + (idiomaAtual === "pt") + '">PT</button>' +
@@ -1729,6 +1818,21 @@ function renderServicos(){
   }).join("");
 }
 
+function renderProcesso(){
+  const t = T();
+  document.getElementById("processo-eyebrow").textContent = t.processo.eyebrow;
+  document.getElementById("processo-titulo").innerHTML =
+    t.processo.tituloAntes + "<em>" + t.processo.tituloDestaque + "</em>" + t.processo.tituloDepois;
+  document.getElementById("processo-texto").textContent = t.processo.texto;
+
+  document.getElementById("grade-processo").innerHTML = t.processo.itens.map((p, i) =>
+    '<div class="processo-item revelar">' +
+      '<span class="processo-numero">' + (i + 1) + '</span>' +
+      '<p class="processo-texto"><strong>' + p.titulo + '.</strong> ' + p.descricao + '</p>' +
+    '</div>'
+  ).join("");
+}
+
 function renderContato(){
   const t = T();
   document.getElementById("contato-eyebrow").textContent = t.contato.eyebrow;
@@ -1790,6 +1894,7 @@ function renderTudo(){
   renderPortfolioVideos();
   renderPortfolioFotos();
   renderServicos();
+  renderProcesso();
   renderFaq();
   renderContato();
   renderRodape();
