@@ -394,7 +394,8 @@
 
   .hero-foto{
     position: relative;
-    aspect-ratio: 4/5;
+    height: 0;
+    padding-top: 125%;
     border-radius: var(--raio);
     /* EDITE AQUI: bloco simulando a foto principal da Rafaela.
        Para usar uma foto real, troque a div .hero-foto por:
@@ -449,7 +450,8 @@
   }
 
   .sobre-foto{
-    aspect-ratio: 3/4;
+    height: 0;
+    padding-top: 133.333%;
     border-radius: var(--raio);
     background: linear-gradient(200deg, var(--queimado) 0%, #d98a90 35%, var(--creme-carta) 70%, var(--royal) 130%);
     box-shadow: var(--sombra);
@@ -571,11 +573,12 @@
   .cartao-trabalho:hover{ transform: translateY(-6px); }
 
   .cartao-trabalho-imagem{
-    aspect-ratio: 9/16;
+    height: 0;
+    padding-top: 177.778%;
     position: relative;
   }
   .cartao-trabalho-imagem.imagem-foto{
-    aspect-ratio: 1/1;
+    padding-top: 100%;
   }
   .cartao-trabalho-foto{
     position: absolute;
@@ -1024,7 +1027,7 @@
     .hero{ padding-top: 148px; }
     .hero-foto{ max-width: 420px; margin: 0 auto; }
     .sobre-grade{ grid-template-columns: 1fr; }
-    .sobre-foto{ max-width: 380px; margin: 0 auto; aspect-ratio: 4/3; }
+    .sobre-foto{ max-width: 380px; margin: 0 auto; padding-top: 75%; }
     .grade-portfolio{ grid-template-columns: repeat(2, 1fr); }
     .grade-servicos{ grid-template-columns: repeat(2, 1fr); }
     .contato-janela-corpo{ grid-template-columns: 1fr; gap: 40px; padding: 36px; }
