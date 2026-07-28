@@ -1355,6 +1355,7 @@ const PORTFOLIO_VIDEOS = [
   { id: "kfmjTGT1gL0", categorias: ["beleza"], url: "https://youtube.com/shorts/kfmjTGT1gL0", tituloPt: "Skincare ASMR – Garnier", tituloEn: "ASMR skincare – Garnier", capa: "imagens/portfolio-videos/capa-skincare-garnier-asmr.jpg" },
   { id: "OqADOIezdro", categorias: ["beleza", "ads"], url: "https://youtube.com/shorts/OqADOIezdro", tituloPt: "Haircare – Pantene", tituloEn: "Hair care – Pantene", capa: "imagens/portfolio-videos/capa-haircare-pantene.jpg" },
   { id: "MhpClbp7ydE", categorias: ["beleza", "ads"], url: "https://youtube.com/shorts/MhpClbp7ydE", tituloPt: "Haircare – Elseve", tituloEn: "Hair care – Elseve", capa: "imagens/portfolio-videos/capa-haircare-elseve.jpg" },
+  { id: "ftPZUbps5l4", categorias: ["beleza"], url: "https://youtube.com/shorts/ftPZUbps5l4", tituloPt: "Protetor Solar em Bastão – Ollie", tituloEn: "Sunscreen Stick – Ollie" },
   { id: "hp0bmPDBuFg", categorias: ["moda"], url: "https://youtube.com/shorts/hp0bmPDBuFg", tituloPt: "Trend de acessórios", tituloEn: "Accessories trend" },
   { id: "h8v-Lkg7GYw", categorias: ["moda"], url: "https://youtube.com/shorts/h8v-Lkg7GYw", tituloPt: "Unboxing de roupas – Temu", tituloEn: "Clothing unboxing – Temu", capa: "imagens/portfolio-videos/capa-unboxing-temu.jpg" },
   { id: "msCW92ZLvnU", categorias: ["moda"], url: "https://youtube.com/shorts/msCW92ZLvnU", tituloPt: "Uma peça, sete looks – Shein", tituloEn: "One piece, seven looks – Shein", capa: "imagens/portfolio-videos/capa-shein-sete-looks.jpg" },
@@ -1674,10 +1675,10 @@ function renderHero(){
 
   const emailLabel = t.rodape.emailLabel;
   const redes = [
+    { chave: "whatsapp", url: "https://wa.me/55" + DADOS.telefone, label: "WhatsApp" },
+    { chave: "email", url: "mailto:" + DADOS.email, label: emailLabel },
     { chave: "instagram", url: DADOS.instagramUrl, label: "Instagram" },
     { chave: "tiktok", url: DADOS.tiktokUrl, label: "TikTok" },
-    { chave: "email", url: "mailto:" + DADOS.email, label: emailLabel },
-    { chave: "whatsapp", url: "https://wa.me/55" + DADOS.telefone, label: "WhatsApp" },
   ];
   document.getElementById("hero-redes").innerHTML = redes.map(r =>
     '<a class="hero-rede-link" href="' + r.url + '" target="_blank" rel="noopener noreferrer" aria-label="' + r.label + '">' + ICONES_REDES[r.chave] + '</a>'
