@@ -65,24 +65,9 @@
   }
 
   /* ==========================================================
-     DECORAÇÃO LATERAL (quadriculado + cerejas, só em telas largas)
+     CEREJAS FLUTUANTES (decoração de fundo, atrás de todo o conteúdo)
      ========================================================== */
-  .fundo-lateral{
-    display: none;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    width: calc((100vw - var(--largura-max)) / 2);
-    background-image: url("imagens/fundo/quadriculado-tile.png");
-    background-repeat: repeat;
-    background-size: 220px 160px;
-    z-index: -1;
-  }
-  .fundo-lateral-esquerda{ left: 0; }
-  .fundo-lateral-direita{ right: 0; }
-
   .cerejas-flutuantes{
-    display: none;
     position: fixed;
     inset: 0;
     pointer-events: none;
@@ -91,23 +76,18 @@
   }
   .cereja{
     position: absolute;
-    width: 72px;
+    width: 64px;
     height: auto;
-    opacity: 0.95;
+    opacity: 0.9;
     filter: drop-shadow(0 4px 6px rgba(20,17,13,0.18));
     animation: flutuar-cereja 7s ease-in-out infinite;
   }
-  .cereja-1{ top: 9%;  left: 10px;  animation-delay: 0s; }
-  .cereja-2{ top: 20%; right: 10px; animation-delay: 1.2s; width: 58px; }
-  .cereja-3{ top: 46%; left: 10px;  animation-delay: 2.4s; width: 64px; }
-  .cereja-4{ top: 63%; right: 10px; animation-delay: 0.8s; }
-  .cereja-5{ top: 83%; left: 10px;  animation-delay: 3s;   width: 54px; }
-  .cereja-6{ top: 93%; right: 10px; animation-delay: 1.8s; width: 76px; }
-
-  @media (min-width: 1300px){
-    .fundo-lateral{ display: block; }
-    .cerejas-flutuantes{ display: block; }
-  }
+  .cereja-1{ top: 8%;  left: 2%;  animation-delay: 0s; }
+  .cereja-2{ top: 18%; right: 3%; animation-delay: 1.2s; width: 52px; }
+  .cereja-3{ top: 38%; left: 4%;  animation-delay: 2.4s; width: 56px; }
+  .cereja-4{ top: 55%; right: 2%; animation-delay: 0.8s; }
+  .cereja-5{ top: 75%; left: 3%;  animation-delay: 3s;   width: 48px; }
+  .cereja-6{ top: 90%; right: 4%; animation-delay: 1.8s; width: 60px; }
 
   @keyframes flutuar-cereja{
     0%, 100%{ transform: translateY(0) rotate(-4deg); }
@@ -1166,9 +1146,6 @@
 </style>
 </head>
 <body>
-
-<div class="fundo-lateral fundo-lateral-esquerda" aria-hidden="true"></div>
-<div class="fundo-lateral fundo-lateral-direita" aria-hidden="true"></div>
 
 <div class="cerejas-flutuantes" aria-hidden="true">
   <img class="cereja cereja-1" src="imagens/fundo/cereja.png" alt="">
