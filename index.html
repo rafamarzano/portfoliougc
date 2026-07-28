@@ -56,11 +56,7 @@
 
   body{
     margin: 0;
-    background-color: var(--creme);
-    background-image: url("imagens/fundo/quadriculado-tile.png");
-    background-repeat: repeat;
-    background-size: 300px 220px;
-    background-attachment: fixed;
+    background: var(--creme);
     color: var(--tinta);
     font-family: var(--sans);
     font-size: 16px;
@@ -69,9 +65,24 @@
   }
 
   /* ==========================================================
-     CEREJAS FLUTUANTES (decoração de fundo)
+     DECORAÇÃO LATERAL (quadriculado + cerejas, só em telas largas)
      ========================================================== */
+  .fundo-lateral{
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: calc((100vw - var(--largura-max)) / 2);
+    background-image: url("imagens/fundo/quadriculado-tile.png");
+    background-repeat: repeat;
+    background-size: 220px 160px;
+    z-index: -1;
+  }
+  .fundo-lateral-esquerda{ left: 0; }
+  .fundo-lateral-direita{ right: 0; }
+
   .cerejas-flutuantes{
+    display: none;
     position: fixed;
     inset: 0;
     pointer-events: none;
@@ -86,12 +97,17 @@
     filter: drop-shadow(0 4px 6px rgba(20,17,13,0.18));
     animation: flutuar-cereja 7s ease-in-out infinite;
   }
-  .cereja-1{ top: 9%;  left: 5%;  animation-delay: 0s; }
-  .cereja-2{ top: 20%; right: 7%; animation-delay: 1.2s; width: 58px; }
-  .cereja-3{ top: 46%; left: 3%;  animation-delay: 2.4s; width: 64px; }
-  .cereja-4{ top: 63%; right: 5%; animation-delay: 0.8s; }
-  .cereja-5{ top: 83%; left: 8%;  animation-delay: 3s;   width: 54px; }
-  .cereja-6{ top: 93%; right: 10%; animation-delay: 1.8s; width: 76px; }
+  .cereja-1{ top: 9%;  left: 10px;  animation-delay: 0s; }
+  .cereja-2{ top: 20%; right: 10px; animation-delay: 1.2s; width: 58px; }
+  .cereja-3{ top: 46%; left: 10px;  animation-delay: 2.4s; width: 64px; }
+  .cereja-4{ top: 63%; right: 10px; animation-delay: 0.8s; }
+  .cereja-5{ top: 83%; left: 10px;  animation-delay: 3s;   width: 54px; }
+  .cereja-6{ top: 93%; right: 10px; animation-delay: 1.8s; width: 76px; }
+
+  @media (min-width: 1300px){
+    .fundo-lateral{ display: block; }
+    .cerejas-flutuantes{ display: block; }
+  }
 
   @keyframes flutuar-cereja{
     0%, 100%{ transform: translateY(0) rotate(-4deg); }
@@ -206,10 +222,10 @@
   .botao:hover{ transform: translateY(-2px); }
 
   .botao-primario{
-    background: var(--tinta);
+    background: var(--royal);
     color: var(--creme);
   }
-  .botao-primario:hover{ background: var(--royal); }
+  .botao-primario:hover{ background: var(--royal-escuro); }
 
   .botao-secundario{
     background: transparent;
@@ -217,7 +233,7 @@
     border-color: var(--tinta);
   }
   .botao-secundario:hover{
-    background: var(--tinta);
+    background: var(--royal);
     color: var(--creme);
   }
 
@@ -302,7 +318,7 @@
   .nav-links a:focus-visible::after{ width: 100%; }
 
   .nav-cta{
-    background: var(--tinta);
+    background: var(--royal);
     color: var(--creme) !important;
     padding: 13px 30px;
     margin: -5px -8px;
@@ -310,7 +326,7 @@
     font-size: 0.88rem !important;
   }
   .nav-cta::after{ display: none; }
-  .nav-cta:hover{ background: var(--royal) !important; }
+  .nav-cta:hover{ background: var(--royal-escuro) !important; }
 
   .nav-links > li{ display: flex; align-items: center; }
 
@@ -333,8 +349,8 @@
   }
   .idioma-btn:hover{ border-color: var(--tinta); color: var(--tinta); }
   .idioma-btn.ativo{
-    background: var(--tinta);
-    border-color: var(--tinta);
+    background: var(--royal);
+    border-color: var(--royal);
     color: var(--creme);
   }
 
@@ -579,8 +595,8 @@
     color: var(--tinta);
   }
   .filtro-botao.ativo{
-    background: var(--tinta);
-    border-color: var(--tinta);
+    background: var(--royal);
+    border-color: var(--royal);
     color: var(--creme);
   }
 
@@ -878,7 +894,7 @@
     line-height: 1.5;
   }
   .faq-pergunta .faq-bolha{
-    background: var(--tinta);
+    background: var(--royal);
     color: var(--creme);
     border-bottom-right-radius: 4px;
   }
@@ -1071,13 +1087,6 @@
   }
 
   @media (max-width: 720px){
-    body{ background-size: 190px 140px; }
-    .cereja{ width: 46px; }
-    .cereja-1{ width: 42px; }
-    .cereja-2{ width: 38px; }
-    .cereja-3{ width: 42px; }
-    .cereja-6{ width: 48px; }
-
     section{ padding: 80px 0; }
     .nav-links{
       position: fixed;
@@ -1157,6 +1166,9 @@
 </style>
 </head>
 <body>
+
+<div class="fundo-lateral fundo-lateral-esquerda" aria-hidden="true"></div>
+<div class="fundo-lateral fundo-lateral-direita" aria-hidden="true"></div>
 
 <div class="cerejas-flutuantes" aria-hidden="true">
   <img class="cereja cereja-1" src="imagens/fundo/cereja.png" alt="">
