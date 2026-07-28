@@ -175,6 +175,9 @@
     gap: 32px;
     margin-bottom: 68px;
     flex-wrap: wrap;
+    background: var(--creme);
+    border-radius: var(--raio);
+    padding: 30px 34px;
   }
 
   /* Foco visível para navegação por teclado */
@@ -370,6 +373,12 @@
     align-items: center;
   }
 
+  .hero-conteudo{
+    background: var(--creme);
+    border-radius: var(--raio);
+    padding: 36px 40px;
+  }
+
   .hero-nome{
     font-size: clamp(2.6rem, 6vw, 4.4rem);
     margin-bottom: 16px;
@@ -467,6 +476,12 @@
     grid-template-columns: 0.85fr 1.15fr;
     gap: 64px;
     align-items: center;
+  }
+
+  .sobre-texto{
+    background: var(--creme);
+    border-radius: var(--raio);
+    padding: 36px 40px;
   }
 
   .sobre-foto{
@@ -732,12 +747,12 @@
     color: var(--tinta-suave);
   }
   .cartao-servico.destaque{
-    background: var(--tinta);
-    border-color: var(--tinta);
+    background: var(--royal);
+    border-color: var(--royal);
   }
   .cartao-servico.destaque h3{ color: var(--creme); }
   .cartao-servico.destaque p{ color: rgba(243,238,233,0.78); }
-  .cartao-servico.destaque .cartao-servico-numero{ color: var(--queimado); }
+  .cartao-servico.destaque .cartao-servico-numero{ color: var(--creme); }
   .cartao-servico.destaque .cartao-servico-tag{
     border-color: rgba(243,238,233,0.35);
     color: var(--creme);
@@ -996,9 +1011,10 @@
      8. RODAPÉ
      ========================================================== */
   .rodape{
-    background: var(--tinta);
-    color: rgba(243,238,233,0.72);
+    background: var(--creme);
+    color: var(--tinta-suave);
     padding: 56px 0 30px;
+    border-top: 1px solid var(--linha);
   }
   .rodape-topo{
     display: flex;
@@ -1007,13 +1023,13 @@
     flex-wrap: wrap;
     gap: 24px;
     padding-bottom: 32px;
-    border-bottom: 1px solid rgba(243,238,233,0.14);
+    border-bottom: 1px solid var(--linha);
     margin-bottom: 24px;
   }
   .rodape-logo{
     font-family: var(--serif);
     font-size: 1.5rem;
-    color: var(--creme);
+    color: var(--tinta);
   }
   .rodape-logo em{ color: var(--queimado); }
   .rodape-redes{
@@ -1023,7 +1039,7 @@
   .rodape-redes a{
     font-size: 0.88rem;
     font-weight: 600;
-    color: rgba(243,238,233,0.85);
+    color: var(--tinta);
   }
   .rodape-redes a:hover{ color: var(--queimado); }
   .rodape-base{
@@ -1032,7 +1048,7 @@
     flex-wrap: wrap;
     gap: 12px;
     font-size: 0.8rem;
-    color: rgba(243,238,233,0.5);
+    color: var(--tinta-suave);
   }
 
   /* ==========================================================
