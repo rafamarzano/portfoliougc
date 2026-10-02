@@ -540,6 +540,7 @@
   .filtros{
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 10px;
     margin-bottom: 40px;
   }
@@ -564,6 +565,251 @@
     border-color: var(--royal);
     color: var(--creme);
   }
+
+  .subfiltros-inline{
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding-left: 14px;
+    margin-left: 4px;
+    border-left: 2px dashed var(--linha);
+  }
+  .subfiltro-botao{
+    background: var(--branco);
+    border: 1.5px dashed var(--linha);
+    color: var(--tinta-suave);
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transicao);
+  }
+  .subfiltro-botao:hover{ border-color: var(--tinta); color: var(--tinta); }
+  .subfiltro-botao.ativo{
+    background: var(--tinta);
+    border-color: var(--tinta);
+    color: var(--creme);
+  }
+
+  .linhas-videos{
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .linha-categoria{ scroll-margin-top: 110px; }
+  .linha-categoria-cabecalho{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .linha-categoria-titulo-linha{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .linha-categoria-titulo{
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--queimado);
+    margin: 0;
+  }
+  .linha-categoria-contagem{
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--royal);
+    margin-left: 10px;
+  }
+  .linha-categoria-setas{ display: flex; gap: 8px; flex-shrink: 0; }
+  .seta-categoria{
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: 1.5px solid var(--linha);
+    background: var(--branco);
+    font-size: 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all var(--transicao);
+  }
+  .seta-categoria:hover{ background: var(--royal); border-color: var(--royal); color: var(--creme); }
+
+  .linha-categoria-scroll{
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 4px 4px 12px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+  .linha-categoria-scroll::-webkit-scrollbar{ display: none; }
+  .linha-categoria-scroll .cartao-trabalho{
+    flex: 0 0 200px;
+  }
+  @media (max-width: 640px){
+    .linha-categoria-scroll .cartao-trabalho{ flex-basis: 160px; }
+  }
+
+  /* ==========================================================
+     3A. MARCAS (ticker de logos)
+     ========================================================== */
+  .marcas-ticker-wrap{
+    background: var(--queimado);
+    border-top: 1px solid var(--linha);
+    border-bottom: 1px solid var(--linha);
+  }
+  .marcas-ticker-label{
+    text-align: center;
+    padding: 16px 0 6px;
+    font-family: var(--sans);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--creme);
+  }
+  .marcas-ticker{
+    overflow: hidden;
+    white-space: nowrap;
+    height: 100px;
+    display: flex;
+    align-items: center;
+  }
+  .marcas-ticker-track{
+    display: inline-flex;
+    align-items: center;
+    animation: marcasTickerScroll 32s linear infinite;
+    will-change: transform;
+  }
+  .marcas-ticker:hover .marcas-ticker-track{ animation-play-state: paused; }
+  .marcas-ticker-item{ display: inline-flex; align-items: center; padding: 0 18px; }
+  .marcas-logo-chip{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--creme);
+    border-radius: 10px;
+    padding: 12px 24px;
+    height: 70px;
+    min-width: 120px;
+  }
+  .marcas-logo-img{ max-height: 46px; max-width: 200px; width: auto; height: auto; object-fit: contain; display: block; }
+  .marcas-logo-fallback{ font-family: var(--serif); font-size: 1.15rem; color: var(--tinta); padding: 0 4px; white-space: nowrap; }
+  @keyframes marcasTickerScroll{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+  }
+
+  /* ==========================================================
+     3B. CASE DE SUCESSO
+     ========================================================== */
+  .case-sucesso-grade{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 48px;
+  }
+  .case-sucesso-video-col{ width: 100%; max-width: 320px; }
+  .case-sucesso-video{
+    position: relative;
+    width: 100%;
+    border-radius: var(--raio);
+    overflow: hidden;
+    background: var(--tinta);
+    aspect-ratio: 9 / 16;
+    box-shadow: var(--sombra);
+    cursor: pointer;
+  }
+  .case-sucesso-video .cartao-trabalho-thumb{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .case-sucesso-video .cartao-trabalho-play{
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: rgba(20,17,13,0.55); backdrop-filter: blur(4px);
+    border: 1.5px solid rgba(255,255,255,0.6);
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    transition: transform var(--transicao), background var(--transicao);
+  }
+  .case-sucesso-video .cartao-trabalho-play:hover{ background: var(--royal); transform: translate(-50%, -50%) scale(1.08); }
+  .case-sucesso-video .cartao-trabalho-play::before{
+    content: ""; border-style: solid; border-width: 9px 0 9px 15px;
+    border-color: transparent transparent transparent var(--branco); margin-left: 4px;
+  }
+  .case-sucesso-metrica{
+    margin-top: 14px; display: inline-block;
+    background: var(--royal); color: var(--creme);
+    font-family: var(--sans); font-weight: 800; font-size: 0.95rem;
+    padding: 8px 16px; border-radius: 100px;
+  }
+  .case-sucesso-print{
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 9 / 16;
+    border-radius: var(--raio);
+    overflow: hidden;
+    background: var(--creme-carta);
+    box-shadow: var(--sombra);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .case-sucesso-print-img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .case-sucesso-print-placeholder{
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    gap: 10px; text-align: center; padding: 40px; color: var(--tinta-suave); font-size: 0.95rem;
+  }
+  .case-sucesso-print.sem-imagem{ border: 1.5px dashed var(--linha); }
+  .case-sucesso-print.sem-imagem .case-sucesso-print-img{ display: none; }
+  .case-sucesso-print.sem-imagem .case-sucesso-print-placeholder{ display: flex; }
+  .case-sucesso-intro{ margin-top: 18px; max-width: 640px; }
+  .case-sucesso-intro h3{
+    font-family: var(--sans);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    font-size: 1.1rem;
+    color: var(--royal);
+    margin-bottom: 6px;
+  }
+  .case-sucesso-intro p{
+    color: var(--tinta-suave);
+    font-size: 1.05rem;
+    margin: 0;
+  }
+  /* ==========================================================
+     5A. FEEDBACKS
+     ========================================================== */
+  .grade-feedbacks{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+  }
+  @media (max-width: 1000px){ .grade-feedbacks{ grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px){ .grade-feedbacks{ grid-template-columns: 1fr; } }
+  .cartao-feedback{
+    position: relative;
+    border-radius: var(--raio);
+    overflow: hidden;
+    background: var(--branco);
+    box-shadow: var(--sombra);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cartao-feedback.sem-imagem{ min-height: 280px; background: var(--creme-carta); }
+  .cartao-feedback-img{ width: 100%; height: auto; display: block; }
+  .cartao-feedback-placeholder{
+    display: none; position: absolute; inset: 0; flex-direction: column; align-items: center;
+    justify-content: center; gap: 8px; text-align: center; padding: 24px;
+    color: var(--tinta-suave); font-size: 0.85rem; border: 1.5px dashed var(--linha);
+  }
+  .cartao-feedback.sem-imagem .cartao-feedback-img{ display: none; }
+  .cartao-feedback.sem-imagem .cartao-feedback-placeholder{ display: flex; }
 
   .grade-portfolio{
     display: grid;
@@ -1192,6 +1438,47 @@
   </section>
 
   <!-- ============================================================
+       3A. MARCAS (ticker de logos)
+       ============================================================ -->
+  <div class="marcas-ticker-wrap revelar" id="marcas-ticker-wrap">
+    <p class="marcas-ticker-label" id="marcas-ticker-label"></p>
+    <div class="marcas-ticker" aria-hidden="true">
+      <div class="marcas-ticker-track" id="marcas-ticker-track"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       3B. CASE DE SUCESSO
+       ============================================================ -->
+  <section class="container" id="case-sucesso">
+    <div class="cabecalho-secao revelar">
+      <div>
+        <span class="eyebrow" id="case-sucesso-eyebrow"></span>
+        <h2 class="titulo-secao" id="case-sucesso-titulo"></h2>
+        <div class="case-sucesso-intro">
+          <h3 id="case-sucesso-intro-titulo"></h3>
+          <p id="case-sucesso-intro-texto"></p>
+        </div>
+      </div>
+    </div>
+    <div class="case-sucesso-grade revelar">
+      <div class="case-sucesso-video-col">
+        <div class="case-sucesso-video" id="case-sucesso-video-aria" data-video-id="0DwORexkXMs" data-video-url="https://youtube.com/shorts/0DwORexkXMs">
+          <img class="cartao-trabalho-thumb" id="case-sucesso-video-img" src="https://i.ytimg.com/vi/0DwORexkXMs/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/0DwORexkXMs/hqdefault.jpg';" alt="" loading="lazy">
+          <button type="button" class="cartao-trabalho-play" id="case-sucesso-video-play"></button>
+        </div>
+        <span class="case-sucesso-metrica" id="case-sucesso-metrica"></span>
+      </div>
+      <div class="case-sucesso-print">
+        <img class="case-sucesso-print-img" src="imagens/portfolio-fotos/case-sucesso-metricas.png" alt="" loading="lazy" onerror="this.closest('.case-sucesso-print').classList.add('sem-imagem')">
+        <div class="case-sucesso-print-placeholder">
+          <span id="case-sucesso-placeholder-texto"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
        4. PORTFÓLIO DE VÍDEOS
        ============================================================ -->
   <section class="container" id="portfolio-videos">
@@ -1203,7 +1490,7 @@
       <p class="texto-secao" id="portfolio-videos-texto"></p>
     </div>
     <div class="filtros revelar" id="filtros-videos" role="group" aria-label="Filtrar vídeos por nicho"></div>
-    <div class="grade-portfolio" id="grade-videos"></div>
+    <div class="linhas-videos" id="linhas-videos"></div>
   </section>
 
   <!-- ============================================================
@@ -1218,6 +1505,20 @@
       <p class="texto-secao" id="portfolio-fotos-texto"></p>
     </div>
     <div class="grade-portfolio" id="grade-fotos"></div>
+  </section>
+
+  <!-- ============================================================
+       5A. FEEDBACKS
+       ============================================================ -->
+  <section class="container" id="feedbacks">
+    <div class="cabecalho-secao revelar">
+      <div>
+        <span class="eyebrow" id="feedbacks-eyebrow"></span>
+        <h2 class="titulo-secao" id="feedbacks-titulo"></h2>
+      </div>
+      <p class="texto-secao" id="feedbacks-texto"></p>
+    </div>
+    <div class="grade-feedbacks" id="grade-feedbacks"></div>
   </section>
 
   <!-- ============================================================
@@ -1379,6 +1680,19 @@ const FAQ_ITENS = [
   },
 ];
 
+// MARCAS TRABALHADAS — ticker rolante de logos, logo abaixo da seção "Sobre".
+// "logo" é o nome do arquivo em imagens/portfolio-fotos/ — se o arquivo ainda
+// não existir, aparece o nome da marca em texto no lugar do logo (sem quebrar nada).
+const MARCAS = [
+  { nome: "Garnier", logo: "garnier.png" },
+  { nome: "L'Oréal Paris Elseve", logo: "loreal.png" },
+  { nome: "ZOSS", logo: "zoss.png" },
+  { nome: "Plano Capilar Juliane Costa", logo: "" },
+  { nome: "Coala Home", logo: "coala.jpg" },
+  { nome: "SCRL", logo: "scrl.png" },
+  { nome: "Freegells", logo: "freegells.jpg" },
+];
+
 // EDITE AQUI: itens do portfólio de vídeos. "categorias" é uma lista das
 // abas de filtro em que o card aparece (ads | beleza | moda) — um vídeo
 // pode estar em mais de uma aba. "id" é o ID do vídeo no YouTube (a parte
@@ -1387,18 +1701,19 @@ const FAQ_ITENS = [
 // imagem local em imagens/portfolio-videos/ para usar como capa do card
 // no lugar da miniatura automática do YouTube.
 const PORTFOLIO_VIDEOS = [
-  { id: "g5e03lePN-s", categorias: ["beleza"], url: "https://youtube.com/shorts/g5e03lePN-s", tituloPt: "Rímel – Essence", tituloEn: "Mascara – Essence" },
-  { id: "ftPZUbps5l4", categorias: ["beleza"], url: "https://youtube.com/shorts/ftPZUbps5l4", tituloPt: "Protetor Solar em Bastão – Ollie", tituloEn: "Sunscreen Stick – Ollie" },
-  { id: "4-u_Ixr91U0", categorias: ["beleza"], url: "https://youtube.com/shorts/4-u_Ixr91U0", tituloPt: "Skincare – Garnier", tituloEn: "Skincare – Garnier", capa: "imagens/portfolio-videos/capa-skincare-garnier.jpg" },
-  { id: "9oCH6CQwJ8w", categorias: ["beleza"], url: "https://youtube.com/shorts/9oCH6CQwJ8w", tituloPt: "Maquiagem – Sheglam", tituloEn: "Makeup – Sheglam" },
-  { id: "Wc8cZthCIqY", categorias: ["beleza"], url: "https://youtube.com/shorts/Wc8cZthCIqY", tituloPt: "Bodycare – Dove", tituloEn: "Body care – Dove", capa: "imagens/portfolio-videos/capa-bodycare-dove.jpg" },
-  { id: "kfmjTGT1gL0", categorias: ["beleza"], url: "https://youtube.com/shorts/kfmjTGT1gL0", tituloPt: "Skincare ASMR – Garnier", tituloEn: "ASMR skincare – Garnier", capa: "imagens/portfolio-videos/capa-skincare-garnier-asmr.jpg" },
-  { id: "OqADOIezdro", categorias: ["beleza", "ads"], url: "https://youtube.com/shorts/OqADOIezdro", tituloPt: "Haircare – Pantene", tituloEn: "Hair care – Pantene", capa: "imagens/portfolio-videos/capa-haircare-pantene.jpg" },
-  { id: "MhpClbp7ydE", categorias: ["beleza", "ads"], url: "https://youtube.com/shorts/MhpClbp7ydE", tituloPt: "Haircare – Elseve", tituloEn: "Hair care – Elseve", capa: "imagens/portfolio-videos/capa-haircare-elseve.jpg" },
-  { id: "h8v-Lkg7GYw", categorias: ["moda"], url: "https://youtube.com/shorts/h8v-Lkg7GYw", tituloPt: "Unboxing de roupas – Temu", tituloEn: "Clothing unboxing – Temu", capa: "imagens/portfolio-videos/capa-unboxing-temu.jpg" },
+  { id: "g5e03lePN-s", categorias: ["beleza"], subcategoria: "makeup", url: "https://youtube.com/shorts/g5e03lePN-s", tituloPt: "Rímel – Essence", tituloEn: "Mascara – Essence" },
+  { id: "ftPZUbps5l4", categorias: ["beleza"], subcategoria: "skincare", url: "https://youtube.com/shorts/ftPZUbps5l4", tituloPt: "Protetor Solar em Bastão – Ollie", tituloEn: "Sunscreen Stick – Ollie" },
+  { id: "4-u_Ixr91U0", categorias: ["beleza"], subcategoria: "skincare", url: "https://youtube.com/shorts/4-u_Ixr91U0", tituloPt: "Skincare – Garnier", tituloEn: "Skincare – Garnier", capa: "imagens/portfolio-videos/capa-skincare-garnier.jpg" },
+  { id: "9oCH6CQwJ8w", categorias: ["beleza"], subcategoria: "makeup", url: "https://youtube.com/shorts/9oCH6CQwJ8w", tituloPt: "Maquiagem – Sheglam", tituloEn: "Makeup – Sheglam" },
+  { id: "Wc8cZthCIqY", categorias: ["beleza"], subcategoria: "skincare", url: "https://youtube.com/shorts/Wc8cZthCIqY", tituloPt: "Bodycare – Dove", tituloEn: "Body care – Dove", capa: "imagens/portfolio-videos/capa-bodycare-dove.jpg" },
+  { id: "kfmjTGT1gL0", categorias: ["beleza"], subcategoria: "skincare", url: "https://youtube.com/shorts/kfmjTGT1gL0", tituloPt: "Skincare ASMR – Garnier", tituloEn: "ASMR skincare – Garnier", capa: "imagens/portfolio-videos/capa-skincare-garnier-asmr.jpg" },
+  { id: "OqADOIezdro", categorias: ["beleza", "ads"], subcategoria: "haircare", url: "https://youtube.com/shorts/OqADOIezdro", tituloPt: "Haircare – Pantene", tituloEn: "Hair care – Pantene", capa: "imagens/portfolio-videos/capa-haircare-pantene.jpg" },
+  { id: "MhpClbp7ydE", categorias: ["beleza", "ads"], subcategoria: "haircare", url: "https://youtube.com/shorts/MhpClbp7ydE", tituloPt: "Haircare – Elseve", tituloEn: "Hair care – Elseve", capa: "imagens/portfolio-videos/capa-haircare-elseve.jpg" },
   { id: "msCW92ZLvnU", categorias: ["moda"], url: "https://youtube.com/shorts/msCW92ZLvnU", tituloPt: "Uma peça, sete looks – Shein", tituloEn: "One piece, seven looks – Shein", capa: "imagens/portfolio-videos/capa-shein-sete-looks.jpg" },
-  { id: "3g3cJjOntMw", categorias: ["moda"], url: "https://youtube.com/shorts/3g3cJjOntMw", tituloPt: "Fit check academia – Dazy", tituloEn: "Gym fit check – Dazy" },
+  { id: "sEZFEhOwtE0", categorias: ["moda", "ads"], url: "https://youtube.com/shorts/sEZFEhOwtE0", tituloPt: "Promo – Óculos Zoss", tituloEn: "Promo – Zoss Sunglasses" },
   { id: "D1PXnbh-mig", categorias: ["moda"], url: "https://youtube.com/shorts/D1PXnbh-mig", tituloPt: "Acessório Dia dos Pais – Gemany", tituloEn: "Father's Day accessory – Gemany" },
+  { id: "h8v-Lkg7GYw", categorias: ["moda"], url: "https://youtube.com/shorts/h8v-Lkg7GYw", tituloPt: "Unboxing de roupas – Temu", tituloEn: "Clothing unboxing – Temu", capa: "imagens/portfolio-videos/capa-unboxing-temu.jpg" },
+  { id: "3g3cJjOntMw", categorias: ["moda"], url: "https://youtube.com/shorts/3g3cJjOntMw", tituloPt: "Fit check academia – Dazy", tituloEn: "Gym fit check – Dazy" },
   { id: "hp0bmPDBuFg", categorias: ["moda"], url: "https://youtube.com/shorts/hp0bmPDBuFg", tituloPt: "Trend de acessórios", tituloEn: "Accessories trend" },
   { id: "LmCsCfUcFuc", categorias: ["moda"], url: "https://youtube.com/shorts/LmCsCfUcFuc", tituloPt: "Trend de acessórios", tituloEn: "Accessories trend" },
   { id: "ZYt1VQgzwhg", categorias: ["tech"], url: "https://youtube.com/shorts/ZYt1VQgzwhg", tituloPt: "Robô aspirador – ABIR K30", tituloEn: "Robot vacuum – ABIR K30" },
@@ -1421,9 +1736,9 @@ const PORTFOLIO_VIDEOS = [
 // (object-position) quando o recorte quadrado corta a foto. "altPt"/"altEn"
 // só são lidos por leitores de tela (texto alternativo), não aparecem na tela.
 const PORTFOLIO_FOTOS = [
-  { imagem: "imagens/portfolio-fotos/editorial-look.jpg", posicao: "center 10%", altPt: "Editorial de look completo", altEn: "Full outfit editorial" },
+  { imagem: "imagens/portfolio-fotos/coala-home-odorizante.jpg", posicao: "center 15%", altPt: "Odorizante de Ambiente – Coala Home", altEn: "Room spray – Coala Home" },
   { imagem: "imagens/portfolio-fotos/essence-still.jpg", posicao: "center 52%", altPt: "Still de produto, máscara de cílios – Essence", altEn: "Product still, mascara – Essence" },
-  { imagem: "imagens/portfolio-fotos/acessorios.jpg", posicao: "center 20%", altPt: "Still de acessórios, brincos e anéis", altEn: "Accessories still, earrings and rings" },
+  { imagem: "imagens/portfolio-fotos/coala-home-kit-cha-branco.png", posicao: "center 15%", altPt: "Kit Coala Home Chá Branco", altEn: "Coala Home White Tea Kit" },
   { imagem: "imagens/portfolio-fotos/still-maquiagem.jpg", posicao: "center", altPt: "Still de produto, maquiagem", altEn: "Product still, makeup" },
   { imagem: "imagens/portfolio-fotos/protetor-solar.jpg", posicao: "center", altPt: "Still de produto, protetor solar", altEn: "Product still, sunscreen" },
   { imagem: "imagens/portfolio-fotos/bone.jpg", posicao: "center 20%", altPt: "Still de produto, boné", altEn: "Product still, cap" },
@@ -1433,6 +1748,17 @@ const PORTFOLIO_FOTOS = [
   { imagem: "imagens/portfolio-fotos/bold.jpg", posicao: "center 85%", altPt: "Still de produto, barra de proteína Bold", altEn: "Product still, Bold protein bar" },
   { imagem: "imagens/portfolio-fotos/acessorios-copa.jpg", posicao: "center 20%", altPt: "Still de acessórios, brincos", altEn: "Accessories still, earrings" },
   { imagem: "imagens/portfolio-fotos/essence-aplicacao.jpg", posicao: "center 60%", altPt: "Aplicação de máscara de cílios – Essence", altEn: "Applying mascara – Essence" },
+];
+
+// FEEDBACKS — prints de conversas/avaliações de marcas. Para cada print
+// aparecer, salve o arquivo de imagem em imagens/portfolio-fotos/ com o nome
+// indicado abaixo (ou troque o nome do arquivo aqui). Enquanto o arquivo não
+// existir, o card mostra um quadro tracejado de espaço reservado.
+const FEEDBACKS = [
+  { imagem: "imagens/portfolio-fotos/feedback-1.png", altPt: "Print de feedback de marca", altEn: "Brand feedback screenshot" },
+  { imagem: "imagens/portfolio-fotos/feedback-2.png", altPt: "Print de feedback de marca", altEn: "Brand feedback screenshot" },
+  { imagem: "imagens/portfolio-fotos/feedback-3.png", altPt: "Print de feedback de marca", altEn: "Brand feedback screenshot" },
+  { imagem: "imagens/portfolio-fotos/feedback-4.png", altPt: "Print de feedback de marca", altEn: "Brand feedback screenshot" },
 ];
 
 // EDITE AQUI: todo o conteúdo do site em português (pt) e inglês (en).
@@ -1482,7 +1808,21 @@ const TEXTOS = {
       tituloDepois: " para marcas",
       texto: "Cada roteiro nasce de um briefing lido com atenção e entregue com estética, verdade e demonstração real do produto.",
       categorias: { todos: "Todos", ads: "Ads", beleza: "Beleza", moda: "Moda e acessórios", tech: "Tech", gastronomia: "Gastronomia", decor: "Home/Decor", "wellness-fit": "Wellness/Fit" },
+      subcategorias: { todos: "Todos", makeup: "Makeup", skincare: "Skincare", haircare: "Haircare" },
       assistir: "Assistir no YouTube",
+    },
+    marcas: {
+      label: "marcas que já confiaram no meu conteúdo",
+    },
+    caseSucesso: {
+      eyebrow: "Case de sucesso",
+      tituloAntes: "Um resultado que ",
+      tituloDestaque: "fala por si",
+      tituloDepois: ".",
+      metrica: "+600 mil visualizações",
+      placeholder: "Adicione aqui o print das métricas (coloque o arquivo em imagens/portfolio-fotos/case-sucesso-metricas.png)",
+      introTitulo: "Conteúdo que gera alcance e conexão",
+      introTexto: "Conteúdo pensado para prender a atenção, despertar interesse e conectar a marca com novos públicos.",
     },
     portfolioFotos: {
       eyebrow: "Portfólio",
@@ -1490,6 +1830,14 @@ const TEXTOS = {
       tituloDestaque: "produzi",
       tituloDepois: " para marcas",
       texto: "Still de produto e still em uso, com composição, luz e ângulo pensados para valorizar cada detalhe.",
+    },
+    feedbacks: {
+      eyebrow: "Feedbacks",
+      tituloAntes: "O que as marcas ",
+      tituloDestaque: "dizem",
+      tituloDepois: " depois de trabalhar comigo",
+      texto: "Prints de conversas e avaliações reais de marcas que já aprovaram meu conteúdo.",
+      placeholder: "Adicione aqui o print do feedback",
     },
     servicos: {
       eyebrow: "Serviços",
@@ -1597,7 +1945,21 @@ const TEXTOS = {
       tituloDepois: " for brands",
       texto: "Every script starts with a briefing read carefully, and is delivered with aesthetics, truth and a real demonstration of the product.",
       categorias: { todos: "All", ads: "Ads", beleza: "Beauty", moda: "Fashion and accessories", tech: "Tech", gastronomia: "Food", decor: "Home/Decor", "wellness-fit": "Wellness/Fit" },
+      subcategorias: { todos: "All", makeup: "Makeup", skincare: "Skincare", haircare: "Haircare" },
       assistir: "Watch on YouTube",
+    },
+    marcas: {
+      label: "brands that already trusted my content",
+    },
+    caseSucesso: {
+      eyebrow: "Success case",
+      tituloAntes: "A result that ",
+      tituloDestaque: "speaks for itself",
+      tituloDepois: ".",
+      metrica: "+600k views",
+      placeholder: "Add the metrics screenshot here (place the file at imagens/portfolio-fotos/case-sucesso-metricas.png)",
+      introTitulo: "Content that drives reach and connection",
+      introTexto: "Content designed to grab attention, spark interest and connect the brand with new audiences.",
     },
     portfolioFotos: {
       eyebrow: "Portfolio",
@@ -1605,6 +1967,14 @@ const TEXTOS = {
       tituloDestaque: "produced",
       tituloDepois: " for brands",
       texto: "Product stills and in-use stills, with composition, light and angle designed to highlight every detail.",
+    },
+    feedbacks: {
+      eyebrow: "Feedback",
+      tituloAntes: "What brands ",
+      tituloDestaque: "say",
+      tituloDepois: " after working with me",
+      texto: "Screenshots of real conversations and reviews from brands that have already approved my content.",
+      placeholder: "Add the feedback screenshot here",
     },
     servicos: {
       eyebrow: "Services",
@@ -1676,7 +2046,8 @@ const TEXTOS = {
    ================================================================ */
 let idiomaAtual = "pt";
 function T(){ return TEXTOS[idiomaAtual]; }
-let categoriaAtiva = "todos";
+let belezaSubcatAberto = false;
+let belezaSubcatAtivo = "todos";
 let observador;
 
 function renderCabecalho(){
@@ -1812,6 +2183,54 @@ function renderSobre(){
   }
 }
 
+function renderMarcasTicker(){
+  const t = T();
+  document.getElementById("marcas-ticker-label").textContent = t.marcas.label;
+  const track = document.getElementById("marcas-ticker-track");
+  const build = () => MARCAS.map(m => m.logo
+    ? '<span class="marcas-ticker-item">' +
+        '<span class="marcas-logo-chip">' +
+          '<img class="marcas-logo-img" src="imagens/portfolio-fotos/' + m.logo + '" alt="' + m.nome + '" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'inline\';">' +
+          '<span class="marcas-logo-fallback" style="display:none;">' + m.nome + '</span>' +
+        '</span>' +
+      '</span>'
+    : '<span class="marcas-ticker-item"><span class="marcas-logo-chip"><span class="marcas-logo-fallback">' + m.nome + '</span></span></span>'
+  ).join("");
+  track.innerHTML = build() + build();
+}
+
+function renderCaseSucesso(){
+  const t = T();
+  document.getElementById("case-sucesso-eyebrow").textContent = t.caseSucesso.eyebrow;
+  document.getElementById("case-sucesso-titulo").innerHTML =
+    t.caseSucesso.tituloAntes + "<em>" + t.caseSucesso.tituloDestaque + "</em>" + t.caseSucesso.tituloDepois;
+  document.getElementById("case-sucesso-metrica").textContent = t.caseSucesso.metrica;
+  document.getElementById("case-sucesso-placeholder-texto").textContent = t.caseSucesso.placeholder;
+  document.getElementById("case-sucesso-intro-titulo").textContent = t.caseSucesso.introTitulo;
+  document.getElementById("case-sucesso-intro-texto").textContent = t.caseSucesso.introTexto;
+
+  const textoReproduzir = idiomaAtual === "pt" ? "Reproduzir vídeo" : "Play video";
+  const botaoPlay = document.getElementById("case-sucesso-video-play");
+  if(botaoPlay) botaoPlay.setAttribute("aria-label", textoReproduzir);
+
+  // [ATENÇÃO] esse vídeo específico (0DwORexkXMs) está com "reprodução em outros
+  // sites" desativada nas configurações dele no YouTube/Instagram — por isso o
+  // player mostra erro 153 ao tentar tocar aqui dentro. Pra tocar dentro do site
+  // como os outros vídeos, é preciso habilitar isso nas configurações avançadas
+  // do vídeo no YouTube Studio (ou trocar por outro vídeo que já permita).
+  const containerVideo = document.getElementById("case-sucesso-video-aria");
+  if(containerVideo && !containerVideo.dataset.videoLigado){
+    containerVideo.dataset.videoLigado = "1";
+    containerVideo.addEventListener("click", function(){
+      const id = containerVideo.dataset.videoId;
+      containerVideo.innerHTML =
+        '<iframe class="cartao-trabalho-video" src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0" title="Case de sucesso" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+      containerVideo.style.cursor = "default";
+      Tracking.evento("video_view", id, { title: "Case de sucesso" });
+    });
+  }
+}
+
 function renderPortfolioVideos(){
   const t = T();
   document.getElementById("portfolio-videos-eyebrow").textContent = t.portfolioVideos.eyebrow;
@@ -1819,43 +2238,97 @@ function renderPortfolioVideos(){
     t.portfolioVideos.tituloAntes + "<em>" + t.portfolioVideos.tituloDestaque + "</em>" + t.portfolioVideos.tituloDepois;
   document.getElementById("portfolio-videos-texto").textContent = t.portfolioVideos.texto;
 
-  const ordemCategorias = ["todos", "ads", "beleza", "moda", "tech", "gastronomia", "decor", "wellness-fit"];
-  const filtrosEl = document.getElementById("filtros-videos");
-  const gradeEl = document.getElementById("grade-videos");
+  const ordemCategorias = ["beleza", "moda", "ads", "tech", "gastronomia", "decor", "wellness-fit"];
+  const categoriasComVideo = ordemCategorias.filter(cat => PORTFOLIO_VIDEOS.some(v => v.categorias.includes(cat)));
+  const subcategoriasBeleza = ["todos", "makeup", "skincare", "haircare"];
 
-  filtrosEl.innerHTML = ordemCategorias.map(cat =>
-    '<button type="button" class="filtro-botao' + (cat === categoriaAtiva ? " ativo" : "") + '" data-categoria="' + cat + '" aria-pressed="' + (cat === categoriaAtiva) + '">' + t.portfolioVideos.categorias[cat] + '</button>'
+  const filtrosEl = document.getElementById("filtros-videos");
+  const linhasEl = document.getElementById("linhas-videos");
+
+  // clicar em "beleza" abre/fecha as subpílulas de makeup/skincare/haircare, que
+  // aparecem coladas no título "beleza" de dentro da própria fileira de vídeos
+  // (não aqui no menu de cima) — só existem no DOM quando abertas
+  filtrosEl.innerHTML = categoriasComVideo.map(cat =>
+    '<button type="button" class="filtro-botao' + (cat === "beleza" && belezaSubcatAberto ? " ativo" : "") + '" data-categoria="' + cat + '">' + t.portfolioVideos.categorias[cat] + '</button>'
   ).join("");
 
   filtrosEl.onclick = function(e){
     const botao = e.target.closest(".filtro-botao");
     if(!botao) return;
-    categoriaAtiva = botao.dataset.categoria;
-    renderPortfolioVideos();
+    const cat = botao.dataset.categoria;
+    if(cat === "beleza"){
+      belezaSubcatAberto = !belezaSubcatAberto;
+      if(!belezaSubcatAberto) belezaSubcatAtivo = "todos";
+      renderPortfolioVideos();
+    }
+    const linha = document.getElementById("linha-categoria-" + cat);
+    if(linha) linha.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const textoReproduzir = idiomaAtual === "pt" ? "Reproduzir vídeo" : "Play video";
+  const textoVoltar = idiomaAtual === "pt" ? "Voltar" : "Previous";
+  const textoAvancar = idiomaAtual === "pt" ? "Avançar" : "Next";
 
-  gradeEl.innerHTML = PORTFOLIO_VIDEOS.map(item => {
-    const oculto = categoriaAtiva !== "todos" && !item.categorias.includes(categoriaAtiva);
-    const titulo = idiomaAtual === "pt" ? item.tituloPt : item.tituloEn;
-    const categoriaLabel = item.categorias.map(c => t.portfolioVideos.categorias[c]).join(" · ");
-    return '<article class="cartao-trabalho revelar' + (oculto ? " oculto" : "") + '" data-categorias="' + item.categorias.join(" ") + '">' +
-      '<div class="cartao-trabalho-imagem" data-video-id="' + item.id + '" data-video-titulo="' + titulo + '">' +
-        '<span class="cartao-trabalho-tag">' + categoriaLabel + '</span>' +
-        (item.capa
-          ? '<img class="cartao-trabalho-thumb" src="' + item.capa + '" alt="" loading="lazy">'
-          : '<img class="cartao-trabalho-thumb" src="https://i.ytimg.com/vi/' + item.id + '/maxresdefault.jpg" onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/' + item.id + '/hqdefault.jpg\';" alt="" loading="lazy">') +
-        '<button type="button" class="cartao-trabalho-play" aria-label="' + textoReproduzir + ': ' + titulo + '"></button>' +
+  linhasEl.innerHTML = categoriasComVideo.map(cat => {
+    let vids = PORTFOLIO_VIDEOS.filter(v => v.categorias.includes(cat));
+    if(cat === "beleza" && belezaSubcatAtivo !== "todos"){
+      vids = vids.filter(v => v.subcategoria === belezaSubcatAtivo);
+    }
+
+    const cards = vids.map(item => {
+      const titulo = idiomaAtual === "pt" ? item.tituloPt : item.tituloEn;
+      const categoriaLabel = item.categorias.map(c => t.portfolioVideos.categorias[c]).join(" · ");
+      return '<article class="cartao-trabalho revelar visivel" data-categorias="' + item.categorias.join(" ") + '">' +
+        '<div class="cartao-trabalho-imagem" data-video-id="' + item.id + '" data-video-titulo="' + titulo + '">' +
+          '<span class="cartao-trabalho-tag">' + categoriaLabel + '</span>' +
+          (item.capa
+            ? '<img class="cartao-trabalho-thumb" src="' + item.capa + '" alt="" loading="lazy">'
+            : '<img class="cartao-trabalho-thumb" src="https://i.ytimg.com/vi/' + item.id + '/maxresdefault.jpg" onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/' + item.id + '/hqdefault.jpg\';" alt="" loading="lazy">') +
+          '<button type="button" class="cartao-trabalho-play" aria-label="' + textoReproduzir + ': ' + titulo + '"></button>' +
+        '</div>' +
+        '<div class="cartao-trabalho-legenda">' +
+          '<h3 class="cartao-trabalho-titulo">' + titulo + '</h3>' +
+          '<a class="cartao-trabalho-link-externo" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' + t.portfolioVideos.assistir + ' ↗</a>' +
+        '</div>' +
+      '</article>';
+    }).join("");
+
+    const subPillsHtml = (cat === "beleza" && belezaSubcatAberto)
+      ? '<span class="subfiltros-inline">' + subcategoriasBeleza.map(s =>
+          '<button type="button" class="subfiltro-botao' + (s === belezaSubcatAtivo ? " ativo" : "") + '" data-subcategoria="' + s + '">' + t.portfolioVideos.subcategorias[s] + '</button>'
+        ).join("") + '</span>'
+      : '';
+
+    return '<div class="linha-categoria revelar visivel" id="linha-categoria-' + cat + '">' +
+      '<div class="linha-categoria-cabecalho">' +
+        '<div class="linha-categoria-titulo-linha">' +
+          '<h3 class="linha-categoria-titulo">' + t.portfolioVideos.categorias[cat] + '<span class="linha-categoria-contagem">' + vids.length + '</span></h3>' +
+          subPillsHtml +
+        '</div>' +
+        '<div class="linha-categoria-setas">' +
+          '<button type="button" class="seta-categoria seta-voltar" aria-label="' + textoVoltar + '">‹</button>' +
+          '<button type="button" class="seta-categoria seta-avancar" aria-label="' + textoAvancar + '">›</button>' +
+        '</div>' +
       '</div>' +
-      '<div class="cartao-trabalho-legenda">' +
-        '<h3 class="cartao-trabalho-titulo">' + titulo + '</h3>' +
-        '<a class="cartao-trabalho-link-externo" href="' + item.url + '" target="_blank" rel="noopener noreferrer">' + t.portfolioVideos.assistir + ' ↗</a>' +
-      '</div>' +
-    '</article>';
+      '<div class="linha-categoria-scroll">' + cards + '</div>' +
+    '</div>';
   }).join("");
 
-  gradeEl.onclick = function(e){
+  linhasEl.querySelectorAll(".linha-categoria").forEach(linha => {
+    const scroller = linha.querySelector(".linha-categoria-scroll");
+    linha.querySelector(".seta-voltar").addEventListener("click", () => scroller.scrollBy({ left: -440, behavior: "smooth" }));
+    linha.querySelector(".seta-avancar").addEventListener("click", () => scroller.scrollBy({ left: 440, behavior: "smooth" }));
+  });
+
+  linhasEl.querySelectorAll(".subfiltro-botao").forEach(botao => {
+    botao.addEventListener("click", (e) => {
+      e.stopPropagation();
+      belezaSubcatAtivo = botao.dataset.subcategoria;
+      renderPortfolioVideos();
+    });
+  });
+
+  linhasEl.onclick = function(e){
     const botaoPlay = e.target.closest(".cartao-trabalho-play");
     if(!botaoPlay) return;
     const container = botaoPlay.closest(".cartao-trabalho-imagem");
@@ -1868,6 +2341,22 @@ function renderPortfolioVideos(){
   };
 
   revelarNovos();
+}
+
+function renderFeedbacks(){
+  const t = T();
+  document.getElementById("feedbacks-eyebrow").textContent = t.feedbacks.eyebrow;
+  document.getElementById("feedbacks-titulo").innerHTML =
+    t.feedbacks.tituloAntes + "<em>" + t.feedbacks.tituloDestaque + "</em>" + t.feedbacks.tituloDepois;
+  document.getElementById("feedbacks-texto").textContent = t.feedbacks.texto;
+
+  document.getElementById("grade-feedbacks").innerHTML = FEEDBACKS.map(item => {
+    const alt = idiomaAtual === "pt" ? item.altPt : item.altEn;
+    return '<figure class="cartao-feedback revelar">' +
+      '<img class="cartao-feedback-img" src="' + item.imagem + '" alt="' + alt + '" loading="lazy" onerror="this.closest(\'.cartao-feedback\').classList.add(\'sem-imagem\')">' +
+      '<figcaption class="cartao-feedback-placeholder">' + t.feedbacks.placeholder + '</figcaption>' +
+    '</figure>';
+  }).join("");
 }
 
 function renderPortfolioFotos(){
@@ -1981,8 +2470,11 @@ function renderTudo(){
   renderCabecalho();
   renderHero();
   renderSobre();
+  renderMarcasTicker();
+  renderCaseSucesso();
   renderPortfolioVideos();
   renderPortfolioFotos();
+  renderFeedbacks();
   renderServicos();
   renderProcesso();
   renderFaq();
