@@ -852,6 +852,71 @@
     height: 100%;
     border: 0;
   }
+  /* Controles próprios do player (play, progresso, velocidade, tela cheia) */
+  .player-controles{
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 28px 10px 10px;
+    background: linear-gradient(to top, rgba(20,17,13,0.75), rgba(20,17,13,0));
+  }
+  .pc-btn{
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 6px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--branco);
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .pc-btn:hover{ background: rgba(255,255,255,0.18); }
+  .pc-btn svg{ width: 18px; height: 18px; fill: currentColor; }
+  .pc-progresso{
+    flex: 1;
+    min-width: 0;
+    height: 4px;
+    accent-color: var(--branco);
+    cursor: pointer;
+  }
+  .pc-vel-wrap{ position: relative; flex: none; }
+  .pc-vel{ border-radius: 17px; }
+  .pc-menu{
+    position: absolute;
+    right: 0; bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+    border-radius: 12px;
+    background: rgba(20,17,13,0.92);
+  }
+  .pc-menu[hidden]{ display: none; }
+  .pc-menu button{
+    border: 0;
+    border-radius: 8px;
+    padding: 6px 14px;
+    background: transparent;
+    color: var(--branco);
+    font: inherit;
+    font-size: 0.82rem;
+    text-align: left;
+    cursor: pointer;
+  }
+  .pc-menu button:hover{ background: rgba(255,255,255,0.18); }
+  .pc-menu button.ativo{ font-weight: 800; color: #ffd9a0; }
+  .cartao-trabalho-imagem:fullscreen{ height: 100%; padding-top: 0; background: #000; }
+  .cartao-trabalho-imagem:-webkit-full-screen{ height: 100%; padding-top: 0; background: #000; }
+
   .cartao-trabalho-thumb{
     position: absolute;
     inset: 0;
@@ -2335,13 +2400,123 @@ function renderPortfolioVideos(){
     const container = botaoPlay.closest(".cartao-trabalho-imagem");
     const id = container.dataset.videoId;
     const tituloVideo = container.dataset.videoTitulo;
-    const tagHtml = container.querySelector(".cartao-trabalho-tag").outerHTML;
-    container.innerHTML = tagHtml +
-      '<iframe class="cartao-trabalho-video" src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0" title="' + tituloVideo + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+    iniciarPlayerPersonalizado(container, id, tituloVideo);
     Tracking.evento("video_view", id, { title: tituloVideo });
   };
 
   revelarNovos();
+}
+
+let youtubeApiPromessa = null;
+function carregarYouTubeApi(){
+  if(youtubeApiPromessa) return youtubeApiPromessa;
+  youtubeApiPromessa = new Promise(resolve => {
+    if(window.YT && window.YT.Player){ resolve(); return; }
+    const anterior = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = function(){ if(anterior) anterior(); resolve(); };
+    const s = document.createElement("script");
+    s.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(s);
+  });
+  return youtubeApiPromessa;
+}
+
+const VELOCIDADES_PLAYER = [0.5, 0.75, 1, 1.25, 1.5, 2];
+const ICONE_PLAY = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+const ICONE_PAUSE = '<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>';
+const ICONE_TELA_CHEIA = '<svg viewBox="0 0 24 24"><path d="M4 4h6v2H6v4H4zm10 0h6v6h-2V6h-4zM4 14h2v4h4v2H4zm14 0h2v6h-6v-2h4z"/></svg>';
+
+function iniciarPlayerPersonalizado(container, id, tituloVideo){
+  const pt = idiomaAtual === "pt";
+  const tagHtml = container.querySelector(".cartao-trabalho-tag").outerHTML;
+  const podeTelaCheia = !!(container.requestFullscreen || container.webkitRequestFullscreen);
+  const origem = encodeURIComponent(location.origin);
+
+  container.innerHTML = tagHtml +
+    '<iframe class="cartao-trabalho-video" src="https://www.youtube.com/embed/' + id +
+      '?autoplay=1&rel=0&controls=0&playsinline=1&modestbranding=1&enablejsapi=1&origin=' + origem +
+      '" title="' + tituloVideo + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>' +
+    '<div class="player-controles">' +
+      '<button type="button" class="pc-btn pc-play" aria-label="' + (pt ? "Pausar" : "Pause") + '">' + ICONE_PAUSE + '</button>' +
+      '<input type="range" class="pc-progresso" min="0" max="1000" value="0" aria-label="' + (pt ? "Progresso do vídeo" : "Video progress") + '">' +
+      '<div class="pc-vel-wrap">' +
+        '<button type="button" class="pc-btn pc-vel" aria-label="' + (pt ? "Velocidade" : "Speed") + '">1x</button>' +
+        '<div class="pc-menu" hidden>' +
+          VELOCIDADES_PLAYER.map(v => '<button type="button" data-vel="' + v + '"' + (v === 1 ? ' class="ativo"' : '') + '>' + v + 'x</button>').join("") +
+        '</div>' +
+      '</div>' +
+      (podeTelaCheia ? '<button type="button" class="pc-btn pc-tela-cheia" aria-label="' + (pt ? "Tela cheia" : "Fullscreen") + '">' + ICONE_TELA_CHEIA + '</button>' : '') +
+    '</div>';
+
+  const iframe = container.querySelector("iframe");
+  const botaoPlay = container.querySelector(".pc-play");
+  const barra = container.querySelector(".pc-progresso");
+  const botaoVel = container.querySelector(".pc-vel");
+  const menu = container.querySelector(".pc-menu");
+  let player = null;
+  let arrastando = false;
+  let tocando = true;
+
+  function atualizarIconePlay(){
+    botaoPlay.innerHTML = tocando ? ICONE_PAUSE : ICONE_PLAY;
+    botaoPlay.setAttribute("aria-label", tocando ? (pt ? "Pausar" : "Pause") : (pt ? "Reproduzir" : "Play"));
+  }
+
+  carregarYouTubeApi().then(() => {
+    if(!container.isConnected) return;
+    player = new YT.Player(iframe, {
+      events: {
+        onReady: () => {
+          const timer = setInterval(() => {
+            if(!container.isConnected){ clearInterval(timer); return; }
+            if(arrastando || !player.getDuration) return;
+            const dur = player.getDuration();
+            if(dur > 0) barra.value = Math.round(player.getCurrentTime() / dur * 1000);
+          }, 250);
+        },
+        onStateChange: (e) => {
+          if(e.data === 1 || e.data === 2 || e.data === 0){
+            tocando = e.data === 1;
+            atualizarIconePlay();
+          }
+        }
+      }
+    });
+  });
+
+  botaoPlay.addEventListener("click", () => {
+    if(!player || !player.getPlayerState) return;
+    if(player.getPlayerState() === 1) player.pauseVideo(); else player.playVideo();
+  });
+
+  barra.addEventListener("input", () => { arrastando = true; });
+  barra.addEventListener("change", () => {
+    if(player && player.getDuration) player.seekTo(player.getDuration() * barra.value / 1000, true);
+    arrastando = false;
+  });
+
+  botaoVel.addEventListener("click", () => { menu.hidden = !menu.hidden; });
+  menu.addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-vel]");
+    if(!b) return;
+    const v = parseFloat(b.dataset.vel);
+    if(player && player.setPlaybackRate) player.setPlaybackRate(v);
+    botaoVel.textContent = v + "x";
+    menu.querySelectorAll("button").forEach(x => x.classList.toggle("ativo", x === b));
+    menu.hidden = true;
+  });
+
+  const botaoTelaCheia = container.querySelector(".pc-tela-cheia");
+  if(botaoTelaCheia){
+    botaoTelaCheia.addEventListener("click", () => {
+      const atual = document.fullscreenElement || document.webkitFullscreenElement;
+      if(atual){
+        (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+      } else {
+        (container.requestFullscreen || container.webkitRequestFullscreen).call(container);
+      }
+    });
+  }
 }
 
 function renderFeedbacks(){
