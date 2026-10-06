@@ -852,6 +852,19 @@
     height: 100%;
     border: 0;
   }
+  /* O YouTube escolhe a resolução pelo tamanho do player. O iframe é
+     criado 3x maior e reduzido por transform, para ele servir HD
+     mesmo dentro de um card pequeno. */
+  .cartao-trabalho-imagem{ overflow: hidden; }
+  .cartao-trabalho-video.player-hd{
+    inset: auto;
+    top: 0; left: 0;
+    width: 300%;
+    height: 300%;
+    transform: scale(0.33333);
+    transform-origin: 0 0;
+  }
+
   /* Controles próprios do player (play, progresso, velocidade, tela cheia) */
   .player-controles{
     position: absolute;
@@ -2433,7 +2446,7 @@ function iniciarPlayerPersonalizado(container, id, tituloVideo){
   const origem = encodeURIComponent(location.origin);
 
   container.innerHTML = tagHtml +
-    '<iframe class="cartao-trabalho-video" src="https://www.youtube.com/embed/' + id +
+    '<iframe class="cartao-trabalho-video player-hd" src="https://www.youtube.com/embed/' + id +
       '?autoplay=1&rel=0&controls=0&playsinline=1&modestbranding=1&enablejsapi=1&origin=' + origem +
       '" title="' + tituloVideo + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>' +
     '<div class="player-controles">' +
