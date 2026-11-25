@@ -712,10 +712,17 @@
      ========================================================== */
   .case-sucesso-grade{
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+  }
+  .case-sucesso-par{
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
     gap: 48px;
+    width: 100%;
   }
   .case-sucesso-video-col{ width: 100%; max-width: 320px; }
   .case-sucesso-video{
@@ -1540,17 +1547,34 @@
       </div>
     </div>
     <div class="case-sucesso-grade revelar">
-      <div class="case-sucesso-video-col">
-        <div class="case-sucesso-video" id="case-sucesso-video-aria" data-video-id="0DwORexkXMs" data-video-url="https://youtube.com/shorts/0DwORexkXMs">
-          <img class="cartao-trabalho-thumb" id="case-sucesso-video-img" src="https://i.ytimg.com/vi/0DwORexkXMs/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/0DwORexkXMs/hqdefault.jpg';" alt="" loading="lazy">
-          <button type="button" class="cartao-trabalho-play" id="case-sucesso-video-play"></button>
+      <div class="case-sucesso-par">
+        <div class="case-sucesso-video-col">
+          <div class="case-sucesso-video" data-video-id="0DwORexkXMs" data-video-url="https://youtube.com/shorts/0DwORexkXMs">
+            <img class="cartao-trabalho-thumb" src="https://i.ytimg.com/vi/0DwORexkXMs/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/0DwORexkXMs/hqdefault.jpg';" alt="" loading="lazy">
+            <button type="button" class="cartao-trabalho-play"></button>
+          </div>
+          <span class="case-sucesso-metrica"></span>
         </div>
-        <span class="case-sucesso-metrica" id="case-sucesso-metrica"></span>
+        <div class="case-sucesso-print">
+          <img class="case-sucesso-print-img" src="imagens/portfolio-fotos/case-sucesso-metricas.png" alt="" loading="lazy" onerror="this.closest('.case-sucesso-print').classList.add('sem-imagem')">
+          <div class="case-sucesso-print-placeholder">
+            <span class="case-sucesso-placeholder-texto"></span>
+          </div>
+        </div>
       </div>
-      <div class="case-sucesso-print">
-        <img class="case-sucesso-print-img" src="imagens/portfolio-fotos/case-sucesso-metricas.png" alt="" loading="lazy" onerror="this.closest('.case-sucesso-print').classList.add('sem-imagem')">
-        <div class="case-sucesso-print-placeholder">
-          <span id="case-sucesso-placeholder-texto"></span>
+      <div class="case-sucesso-par">
+        <div class="case-sucesso-video-col">
+          <div class="case-sucesso-video" data-video-id="Vmw91tOkkgs" data-video-url="https://youtube.com/shorts/Vmw91tOkkgs">
+            <img class="cartao-trabalho-thumb" src="https://i.ytimg.com/vi/Vmw91tOkkgs/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/Vmw91tOkkgs/hqdefault.jpg';" alt="" loading="lazy">
+            <button type="button" class="cartao-trabalho-play"></button>
+          </div>
+          <span class="case-sucesso-metrica"></span>
+        </div>
+        <div class="case-sucesso-print">
+          <img class="case-sucesso-print-img" src="imagens/portfolio-fotos/case-sucesso-metricas-2.png" alt="" loading="lazy" onerror="this.closest('.case-sucesso-print').classList.add('sem-imagem')">
+          <div class="case-sucesso-print-placeholder">
+            <span class="case-sucesso-placeholder-texto"></span>
+          </div>
         </div>
       </div>
     </div>
@@ -1787,9 +1811,13 @@ const PORTFOLIO_VIDEOS = [
   { id: "kfmjTGT1gL0", categorias: ["beleza"], subcategoria: "skincare", url: "https://youtube.com/shorts/kfmjTGT1gL0", tituloPt: "Skincare ASMR – Garnier", tituloEn: "ASMR skincare – Garnier", capa: "imagens/portfolio-videos/capa-skincare-garnier-asmr.jpg" },
   { id: "OqADOIezdro", categorias: ["beleza", "ads"], subcategoria: "haircare", url: "https://youtube.com/shorts/OqADOIezdro", tituloPt: "Haircare – Pantene", tituloEn: "Hair care – Pantene", capa: "imagens/portfolio-videos/capa-haircare-pantene.jpg" },
   { id: "MhpClbp7ydE", categorias: ["beleza", "ads"], subcategoria: "haircare", url: "https://youtube.com/shorts/MhpClbp7ydE", tituloPt: "Haircare – Elseve", tituloEn: "Hair care – Elseve", capa: "imagens/portfolio-videos/capa-haircare-elseve.jpg" },
+  { id: "Q50pEzG35QU", categorias: ["beleza"], subcategoria: "haircare", url: "https://youtube.com/shorts/Q50pEzG35QU", tituloPt: "Haircare cachos esculturais – Dove", tituloEn: "Sculpted curls hair care – Dove" },
   { id: "VJhkm73EYhU", categorias: ["moda"], url: "https://youtube.com/shorts/VJhkm73EYhU", tituloPt: "Coleção Camisa Brasil – Hering (Versão 1)", tituloEn: "Brasil Shirt Collection – Hering (Version 1)" },
   { id: "msCW92ZLvnU", categorias: ["moda"], url: "https://youtube.com/shorts/msCW92ZLvnU", tituloPt: "Uma peça, sete looks – Shein", tituloEn: "One piece, seven looks – Shein", capa: "imagens/portfolio-videos/capa-shein-sete-looks.jpg" },
   { id: "sEZFEhOwtE0", categorias: ["moda", "ads"], url: "https://youtube.com/shorts/sEZFEhOwtE0", tituloPt: "Promo – Óculos Zoss", tituloEn: "Promo – Zoss Sunglasses" },
+  { id: "6Wmtfopr-88", categorias: ["beleza", "ads"], subcategoria: "skincare", url: "https://youtube.com/shorts/6Wmtfopr-88", tituloPt: "Campanha Black Popozuda – Clarinha", tituloEn: "Black Popozuda campaign – Clarinha" },
+  { id: "rIrspTnrkOk", categorias: ["beleza", "ads"], subcategoria: "skincare", url: "https://youtube.com/shorts/rIrspTnrkOk", tituloPt: "Campanha Black Popozuda – Creme termoativador", tituloEn: "Black Popozuda campaign – Thermoactive cream" },
+  { id: "MOWcaNUOhdw", categorias: ["beleza", "ads"], subcategoria: "skincare", url: "https://youtube.com/shorts/MOWcaNUOhdw", tituloPt: "Campanha Black Popozuda – Sérum lisinha", tituloEn: "Black Popozuda campaign – Smoothing serum" },
   { id: "D1PXnbh-mig", categorias: ["moda"], url: "https://youtube.com/shorts/D1PXnbh-mig", tituloPt: "Acessório Dia dos Pais – Gemany", tituloEn: "Father's Day accessory – Gemany" },
   { id: "TyRHn7K93JM", categorias: ["moda"], url: "https://youtube.com/shorts/TyRHn7K93JM", tituloPt: "Coleção Camisa Brasil – Hering (Versão 2)", tituloEn: "Brasil Shirt Collection – Hering (Version 2)" },
   { id: "h8v-Lkg7GYw", categorias: ["moda"], url: "https://youtube.com/shorts/h8v-Lkg7GYw", tituloPt: "Unboxing de roupas – Temu", tituloEn: "Clothing unboxing – Temu", capa: "imagens/portfolio-videos/capa-unboxing-temu.jpg" },
@@ -1803,6 +1831,7 @@ const PORTFOLIO_VIDEOS = [
   { id: "26JStrRe7O8", categorias: ["gastronomia"], url: "https://youtube.com/shorts/26JStrRe7O8", tituloPt: "Campanha Leve a vida com Freegells – Freegells", tituloEn: "Campaign Leve a vida com Freegells – Freegells" },
   { id: "PZXHUwaRA58", categorias: ["gastronomia", "ads"], url: "https://youtube.com/shorts/PZXHUwaRA58", tituloPt: "Promo – Bacio di Latte", tituloEn: "Promo – Bacio di Latte" },
   { id: "Bv-hVPY1w54", categorias: ["gastronomia"], url: "https://youtube.com/shorts/Bv-hVPY1w54", tituloPt: "Receita – LaCreme", tituloEn: "Recipe – LaCreme" },
+  { id: "1vv2NzLQ9dI", categorias: ["gastronomia", "moda"], url: "https://youtube.com/shorts/1vv2NzLQ9dI", tituloPt: "Vídeo game edição Go! Jelly", tituloEn: "Video game edition Go! Jelly" },
   { id: "kwDV78lrpYU", categorias: ["ads"], url: "https://youtube.com/shorts/kwDV78lrpYU", tituloPt: "Gel de unha – Bluwe", tituloEn: "Nail gel – Bluwe" },
   { id: "udcFJBn_Ycw", categorias: ["decor"], url: "https://youtube.com/shorts/udcFJBn_Ycw", tituloPt: "Luminária Cogumelo", tituloEn: "Mushroom Lamp" },
   { id: "1BbS9kiljks", categorias: ["decor"], url: "https://youtube.com/shorts/1BbS9kiljks", tituloPt: "Kit de Velas – Temu", tituloEn: "Candle Kit – Temu" },
@@ -1888,7 +1917,7 @@ const TEXTOS = {
       tituloDestaque: "filmei",
       tituloDepois: " para marcas",
       texto: "Cada roteiro nasce de um briefing lido com atenção e entregue com estética, verdade e demonstração real do produto.",
-      categorias: { todos: "Todos", ads: "Ads", beleza: "Beleza", moda: "Moda e acessórios", tech: "Tech", gastronomia: "Gastronomia", decor: "Home/Decor", "wellness-fit": "Wellness/Fit" },
+      categorias: { todos: "Todos", ads: "Ads", beleza: "Beleza", moda: "Moda e acessórios", tech: "Tech", gastronomia: "Alimentos e bebidas", decor: "Home/Decor", "wellness-fit": "Wellness/Fit" },
       subcategorias: { todos: "Todos", makeup: "Makeup", skincare: "Skincare", haircare: "Haircare" },
       assistir: "Assistir no YouTube",
     },
@@ -1900,7 +1929,7 @@ const TEXTOS = {
       tituloAntes: "Um resultado que ",
       tituloDestaque: "fala por si",
       tituloDepois: ".",
-      metrica: "+600 mil visualizações",
+      metrica: ["+1M visualizações", "+5M visualizações"],
       placeholder: "Adicione aqui o print das métricas (coloque o arquivo em imagens/portfolio-fotos/case-sucesso-metricas.png)",
       introTitulo: "Conteúdo que gera alcance e conexão",
       introTexto: "Conteúdo pensado para prender a atenção, despertar interesse e conectar a marca com novos públicos.",
@@ -2025,7 +2054,7 @@ const TEXTOS = {
       tituloDestaque: "filmed",
       tituloDepois: " for brands",
       texto: "Every script starts with a briefing read carefully, and is delivered with aesthetics, truth and a real demonstration of the product.",
-      categorias: { todos: "All", ads: "Ads", beleza: "Beauty", moda: "Fashion and accessories", tech: "Tech", gastronomia: "Food", decor: "Home/Decor", "wellness-fit": "Wellness/Fit" },
+      categorias: { todos: "All", ads: "Ads", beleza: "Beauty", moda: "Fashion and accessories", tech: "Tech", gastronomia: "Food and beverages", decor: "Home/Decor", "wellness-fit": "Wellness/Fit" },
       subcategorias: { todos: "All", makeup: "Makeup", skincare: "Skincare", haircare: "Haircare" },
       assistir: "Watch on YouTube",
     },
@@ -2037,7 +2066,7 @@ const TEXTOS = {
       tituloAntes: "A result that ",
       tituloDestaque: "speaks for itself",
       tituloDepois: ".",
-      metrica: "+600k views",
+      metrica: ["+1M views", "+5M views"],
       placeholder: "Add the metrics screenshot here (place the file at imagens/portfolio-fotos/case-sucesso-metricas.png)",
       introTitulo: "Content that drives reach and connection",
       introTexto: "Content designed to grab attention, spark interest and connect the brand with new audiences.",
@@ -2285,22 +2314,27 @@ function renderCaseSucesso(){
   document.getElementById("case-sucesso-eyebrow").textContent = t.caseSucesso.eyebrow;
   document.getElementById("case-sucesso-titulo").innerHTML =
     t.caseSucesso.tituloAntes + "<em>" + t.caseSucesso.tituloDestaque + "</em>" + t.caseSucesso.tituloDepois;
-  document.getElementById("case-sucesso-metrica").textContent = t.caseSucesso.metrica;
-  document.getElementById("case-sucesso-placeholder-texto").textContent = t.caseSucesso.placeholder;
+  document.querySelectorAll(".case-sucesso-metrica").forEach(function(el, i){
+    el.textContent = t.caseSucesso.metrica[i];
+  });
+  document.querySelectorAll(".case-sucesso-placeholder-texto").forEach(function(el){
+    el.textContent = t.caseSucesso.placeholder;
+  });
   document.getElementById("case-sucesso-intro-titulo").textContent = t.caseSucesso.introTitulo;
   document.getElementById("case-sucesso-intro-texto").textContent = t.caseSucesso.introTexto;
 
   const textoReproduzir = idiomaAtual === "pt" ? "Reproduzir vídeo" : "Play video";
-  const botaoPlay = document.getElementById("case-sucesso-video-play");
-  if(botaoPlay) botaoPlay.setAttribute("aria-label", textoReproduzir);
+  document.querySelectorAll(".case-sucesso-video .cartao-trabalho-play").forEach(function(botao){
+    botao.setAttribute("aria-label", textoReproduzir);
+  });
 
   // [ATENÇÃO] esse vídeo específico (0DwORexkXMs) está com "reprodução em outros
   // sites" desativada nas configurações dele no YouTube/Instagram — por isso o
   // player mostra erro 153 ao tentar tocar aqui dentro. Pra tocar dentro do site
   // como os outros vídeos, é preciso habilitar isso nas configurações avançadas
   // do vídeo no YouTube Studio (ou trocar por outro vídeo que já permita).
-  const containerVideo = document.getElementById("case-sucesso-video-aria");
-  if(containerVideo && !containerVideo.dataset.videoLigado){
+  document.querySelectorAll(".case-sucesso-video").forEach(function(containerVideo){
+    if(containerVideo.dataset.videoLigado) return;
     containerVideo.dataset.videoLigado = "1";
     containerVideo.addEventListener("click", function(){
       const id = containerVideo.dataset.videoId;
@@ -2309,7 +2343,7 @@ function renderCaseSucesso(){
       containerVideo.style.cursor = "default";
       Tracking.evento("video_view", id, { title: "Case de sucesso" });
     });
-  }
+  });
 }
 
 function renderPortfolioVideos(){
