@@ -712,18 +712,20 @@
      ========================================================== */
   .case-sucesso-grade{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 64px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
   }
   .case-sucesso-par{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-    gap: 48px;
-    width: 100%;
+    gap: 24px;
   }
+  .case-sucesso-par .case-sucesso-video-col,
+  .case-sucesso-par .case-sucesso-print{ flex: 0 1 250px; width: 250px; max-width: 100%; }
   .case-sucesso-video-col{ width: 100%; max-width: 320px; }
   .case-sucesso-video{
     position: relative;
@@ -1807,18 +1809,19 @@ const PORTFOLIO_VIDEOS = [
   { id: "ftPZUbps5l4", categorias: ["beleza"], subcategoria: "skincare", url: "https://youtube.com/shorts/ftPZUbps5l4", tituloPt: "Protetor Solar em Bastão – Ollie", tituloEn: "Sunscreen Stick – Ollie" },
   { id: "4-u_Ixr91U0", categorias: ["beleza"], subcategoria: "skincare", url: "https://youtube.com/shorts/4-u_Ixr91U0", tituloPt: "Skincare – Garnier", tituloEn: "Skincare – Garnier", capa: "imagens/portfolio-videos/capa-skincare-garnier.jpg" },
   { id: "9oCH6CQwJ8w", categorias: ["beleza"], subcategoria: "makeup", url: "https://youtube.com/shorts/9oCH6CQwJ8w", tituloPt: "Maquiagem – Sheglam", tituloEn: "Makeup – Sheglam" },
+  { id: "OqADOIezdro", categorias: ["beleza", "ads"], subcategoria: "haircare", url: "https://youtube.com/shorts/OqADOIezdro", tituloPt: "Haircare – Pantene", tituloEn: "Hair care – Pantene", capa: "imagens/portfolio-videos/capa-haircare-pantene.jpg" },
+  { id: "Q50pEzG35QU", categorias: ["beleza"], subcategoria: "haircare", url: "https://youtube.com/shorts/Q50pEzG35QU", tituloPt: "Haircare cachos esculturais – Dove", tituloEn: "Sculpted curls hair care – Dove" },
+  { adsPrimeiro: true, id: "6Wmtfopr-88", categorias: ["beleza", "ads"], subcategoria: "skincare", url: "https://youtube.com/shorts/6Wmtfopr-88", tituloPt: "Campanha Black Popozuda – Clarinha", tituloEn: "Black Popozuda campaign – Clarinha" },
+  { adsPrimeiro: true, id: "rIrspTnrkOk", categorias: ["beleza", "ads"], subcategoria: "skincare", url: "https://youtube.com/shorts/rIrspTnrkOk", tituloPt: "Campanha Black Popozuda – Creme termoativador", tituloEn: "Black Popozuda campaign – Thermoactive cream" },
+  { adsPrimeiro: true, id: "MOWcaNUOhdw", categorias: ["beleza", "ads"], subcategoria: "skincare", url: "https://youtube.com/shorts/MOWcaNUOhdw", tituloPt: "Campanha Black Popozuda – Sérum lisinha", tituloEn: "Black Popozuda campaign – Smoothing serum" },
   { id: "Wc8cZthCIqY", categorias: ["beleza"], subcategoria: "skincare", url: "https://youtube.com/shorts/Wc8cZthCIqY", tituloPt: "Bodycare – Dove", tituloEn: "Body care – Dove", capa: "imagens/portfolio-videos/capa-bodycare-dove.jpg" },
   { id: "kfmjTGT1gL0", categorias: ["beleza"], subcategoria: "skincare", url: "https://youtube.com/shorts/kfmjTGT1gL0", tituloPt: "Skincare ASMR – Garnier", tituloEn: "ASMR skincare – Garnier", capa: "imagens/portfolio-videos/capa-skincare-garnier-asmr.jpg" },
-  { id: "OqADOIezdro", categorias: ["beleza", "ads"], subcategoria: "haircare", url: "https://youtube.com/shorts/OqADOIezdro", tituloPt: "Haircare – Pantene", tituloEn: "Hair care – Pantene", capa: "imagens/portfolio-videos/capa-haircare-pantene.jpg" },
   { id: "MhpClbp7ydE", categorias: ["beleza", "ads"], subcategoria: "haircare", url: "https://youtube.com/shorts/MhpClbp7ydE", tituloPt: "Haircare – Elseve", tituloEn: "Hair care – Elseve", capa: "imagens/portfolio-videos/capa-haircare-elseve.jpg" },
-  { id: "Q50pEzG35QU", categorias: ["beleza"], subcategoria: "haircare", url: "https://youtube.com/shorts/Q50pEzG35QU", tituloPt: "Haircare cachos esculturais – Dove", tituloEn: "Sculpted curls hair care – Dove" },
   { id: "VJhkm73EYhU", categorias: ["moda"], url: "https://youtube.com/shorts/VJhkm73EYhU", tituloPt: "Coleção Camisa Brasil – Hering (Versão 1)", tituloEn: "Brasil Shirt Collection – Hering (Version 1)" },
   { id: "msCW92ZLvnU", categorias: ["moda"], url: "https://youtube.com/shorts/msCW92ZLvnU", tituloPt: "Uma peça, sete looks – Shein", tituloEn: "One piece, seven looks – Shein", capa: "imagens/portfolio-videos/capa-shein-sete-looks.jpg" },
   { id: "sEZFEhOwtE0", categorias: ["moda", "ads"], url: "https://youtube.com/shorts/sEZFEhOwtE0", tituloPt: "Promo – Óculos Zoss", tituloEn: "Promo – Zoss Sunglasses" },
-  { id: "6Wmtfopr-88", categorias: ["beleza", "ads"], subcategoria: "skincare", url: "https://youtube.com/shorts/6Wmtfopr-88", tituloPt: "Campanha Black Popozuda – Clarinha", tituloEn: "Black Popozuda campaign – Clarinha" },
-  { id: "rIrspTnrkOk", categorias: ["beleza", "ads"], subcategoria: "skincare", url: "https://youtube.com/shorts/rIrspTnrkOk", tituloPt: "Campanha Black Popozuda – Creme termoativador", tituloEn: "Black Popozuda campaign – Thermoactive cream" },
-  { id: "MOWcaNUOhdw", categorias: ["beleza", "ads"], subcategoria: "skincare", url: "https://youtube.com/shorts/MOWcaNUOhdw", tituloPt: "Campanha Black Popozuda – Sérum lisinha", tituloEn: "Black Popozuda campaign – Smoothing serum" },
   { id: "D1PXnbh-mig", categorias: ["moda"], url: "https://youtube.com/shorts/D1PXnbh-mig", tituloPt: "Acessório Dia dos Pais – Gemany", tituloEn: "Father's Day accessory – Gemany" },
+  { id: "1vv2NzLQ9dI", categorias: ["gastronomia", "moda"], url: "https://youtube.com/shorts/1vv2NzLQ9dI", tituloPt: "Vídeo game edição Go! Jelly", tituloEn: "Video game edition Go! Jelly" },
   { id: "TyRHn7K93JM", categorias: ["moda"], url: "https://youtube.com/shorts/TyRHn7K93JM", tituloPt: "Coleção Camisa Brasil – Hering (Versão 2)", tituloEn: "Brasil Shirt Collection – Hering (Version 2)" },
   { id: "h8v-Lkg7GYw", categorias: ["moda"], url: "https://youtube.com/shorts/h8v-Lkg7GYw", tituloPt: "Unboxing de roupas – Temu", tituloEn: "Clothing unboxing – Temu", capa: "imagens/portfolio-videos/capa-unboxing-temu.jpg" },
   { id: "3g3cJjOntMw", categorias: ["moda"], url: "https://youtube.com/shorts/3g3cJjOntMw", tituloPt: "Fit check academia – Dazy", tituloEn: "Gym fit check – Dazy" },
@@ -1831,7 +1834,6 @@ const PORTFOLIO_VIDEOS = [
   { id: "26JStrRe7O8", categorias: ["gastronomia"], url: "https://youtube.com/shorts/26JStrRe7O8", tituloPt: "Campanha Leve a vida com Freegells – Freegells", tituloEn: "Campaign Leve a vida com Freegells – Freegells" },
   { id: "PZXHUwaRA58", categorias: ["gastronomia", "ads"], url: "https://youtube.com/shorts/PZXHUwaRA58", tituloPt: "Promo – Bacio di Latte", tituloEn: "Promo – Bacio di Latte" },
   { id: "Bv-hVPY1w54", categorias: ["gastronomia"], url: "https://youtube.com/shorts/Bv-hVPY1w54", tituloPt: "Receita – LaCreme", tituloEn: "Recipe – LaCreme" },
-  { id: "1vv2NzLQ9dI", categorias: ["gastronomia", "moda"], url: "https://youtube.com/shorts/1vv2NzLQ9dI", tituloPt: "Vídeo game edição Go! Jelly", tituloEn: "Video game edition Go! Jelly" },
   { id: "kwDV78lrpYU", categorias: ["ads"], url: "https://youtube.com/shorts/kwDV78lrpYU", tituloPt: "Gel de unha – Bluwe", tituloEn: "Nail gel – Bluwe" },
   { id: "udcFJBn_Ycw", categorias: ["decor"], url: "https://youtube.com/shorts/udcFJBn_Ycw", tituloPt: "Luminária Cogumelo", tituloEn: "Mushroom Lamp" },
   { id: "1BbS9kiljks", categorias: ["decor"], url: "https://youtube.com/shorts/1BbS9kiljks", tituloPt: "Kit de Velas – Temu", tituloEn: "Candle Kit – Temu" },
@@ -2386,6 +2388,8 @@ function renderPortfolioVideos(){
 
   linhasEl.innerHTML = categoriasComVideo.map(cat => {
     let vids = PORTFOLIO_VIDEOS.filter(v => v.categorias.includes(cat));
+    // na fileira de ads, os vídeos com adsPrimeiro vêm antes dos demais
+    if(cat === "ads") vids = vids.filter(v => v.adsPrimeiro).concat(vids.filter(v => !v.adsPrimeiro));
     if(cat === "beleza" && belezaSubcatAtivo !== "todos"){
       vids = vids.filter(v => v.subcategoria === belezaSubcatAtivo);
     }
