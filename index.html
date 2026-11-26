@@ -700,6 +700,8 @@
     height: 70px;
     min-width: 120px;
   }
+  .marcas-logo-chip--cheio{ padding: 0; overflow: hidden; width: 120px; }
+  .marcas-logo-chip--cheio .marcas-logo-img{ width: 100%; height: 100%; max-width: none; max-height: none; object-fit: cover; }
   .marcas-logo-img{ max-height: 46px; max-width: 200px; width: auto; height: auto; object-fit: contain; display: block; }
   .marcas-logo-fallback{ font-family: var(--serif); font-size: 1.15rem; color: var(--tinta); padding: 0 4px; white-space: nowrap; }
   @keyframes marcasTickerScroll{
@@ -1795,9 +1797,9 @@ const MARCAS = [
   { nome: "Coala Home", logo: "coala.jpg" },
   { nome: "SCRL", logo: "scrl.png" },
   { nome: "Freegells", logo: "freegells.jpg" },
-  { nome: "Dove", logo: "dove.jpg" },
-  { nome: "Popozuda", logo: "popozuda.jpg" },
-  { nome: "Go! Jelly", logo: "go-jelly.jpg" },
+  { nome: "Dove", logo: "dove.jpg", cheio: true },
+  { nome: "Popozuda", logo: "popozuda.jpg", cheio: true },
+  { nome: "Go! Jelly", logo: "go-jelly.jpg", cheio: true },
 ];
 
 // EDITE AQUI: itens do portfólio de vídeos. "categorias" é uma lista das
@@ -2304,7 +2306,7 @@ function renderMarcasTicker(){
   const track = document.getElementById("marcas-ticker-track");
   const build = () => MARCAS.map(m => m.logo
     ? '<span class="marcas-ticker-item">' +
-        '<span class="marcas-logo-chip">' +
+        '<span class="marcas-logo-chip' + (m.cheio ? ' marcas-logo-chip--cheio' : '') + '">' +
           '<img class="marcas-logo-img" src="imagens/portfolio-fotos/' + m.logo + '" alt="' + m.nome + '" onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'inline\';">' +
           '<span class="marcas-logo-fallback" style="display:none;">' + m.nome + '</span>' +
         '</span>' +
